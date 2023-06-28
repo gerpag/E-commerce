@@ -9,7 +9,7 @@ const SingleProductContainer = () => {
   useEffect(() => {
     // Lógica para obtener el producto del backend
     const product1 = {
-      id: 1,
+      id: 100,
       name: "Messi con la copa",
       description:
         "Mini Messi con la copa del mundo en la mano, final de la copa del mundo quatar 2022",
