@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../configs/db");
+const bcrypt=import("bcrypt");
 
 class User extends Sequelize.Model {}
 
@@ -29,5 +30,20 @@ User.init(
     modelName: "user",
   }
 );
+
+User.addHook("beforeCreate", (user) => {
+  const salt = bcrypt.genSaltSync(8);
+  user.salt = salt;
+
+  return bcrypt
+    .hash(user.password, user.salt)
+    .then((hash) => (user.password = hash));
+});
+
+User.prototype.validatePassword = function (password) {
+  
+  return bcrypt.hash(password, this.salt)
+    .then((hash) => hash === this.password);
+};
 
 module.exports = User;
