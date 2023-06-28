@@ -10,6 +10,11 @@ Products.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    categories: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: { notEmpty: true },
+    },
     name: {
       type: Sequelize.STRING,
       allowNull: false,
