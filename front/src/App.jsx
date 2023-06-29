@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import SingleProductContainer from "./components/SingleProductContainer";
 import GridViewContainer from "./components/GridViewContainer";
+import Footer from "./components/Footer";
 import Login from "./components/Login";
 import AuthModal from "./commons/AuthModal";
 import { useEffect, useState } from "react";
@@ -35,6 +36,7 @@ function App() {
           element={<AuthModal isOpen={isOpen} onClose={handleCloseModal} />}
         />
       </Routes>
+      <Footer />
     </>
   );
 }
