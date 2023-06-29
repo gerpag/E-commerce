@@ -77,7 +77,7 @@
     "name": "Vegeta",
     "description": "El poderoso guerrero Vegeta se une a la colección de figuras de acción. ¡Prepárate para la batalla con este juguete increíble!",
     "price": 3500,
-    "url_image": "Vegeta",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063892/juguetes/veggeta_yssqyh.png",
     "stock": 9
   },
   {
@@ -86,7 +86,7 @@
     "name": "Tiburón",
     "description": "Sumérgete en la diversión con este juguete realista de un tiburón. Ideal para jugar en la piscina o crear aventuras acuáticas.",
     "price": 2500,
-    "url_image": "Tiburón",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063892/juguetes/tiburon_hc2uiz.png",
     "stock": 6
   },
   {
@@ -95,7 +95,7 @@
     "name": "Steve",
     "description": "¡El famoso personaje Steve de Minecraft cobra vida en este set de juguetes! Únete a él en emocionantes aventuras pixeladas.",
     "price": 4200,
-    "url_image": "Steve",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063892/juguetes/stive_q52pjp.png",
     "stock": 12
   },
   {
@@ -104,7 +104,7 @@
     "name": "Sony",
     "description": "Diviértete con este adorable y suave peluche de Sony, el perro más simpático del vecindario. ¡Perfecto para abrazar y jugar!",
     "price": 1800,
-    "url_image": "Sony",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063891/juguetes/sony_p2jpzc.png",
     "stock": 8
   },
   {
@@ -113,7 +113,7 @@
     "name": "Camión",
     "description": "¿Listo para la diversión en la construcción? Este camión de juguete con funciones realistas hará que tus aventuras sean épicas.",
     "price": 3200,
-    "url_image": "Camión",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063891/juguetes/camion_bhgz4a.png",
     "stock": 5
   },
   {
@@ -122,7 +122,7 @@
     "name": "Goku",
     "description": "El legendario guerrero Goku llega en forma de figura de acción. ¡Revive las emocionantes batallas de Dragon Ball con este juguete impresionante!",
     "price": 5500,
-    "url_image": "Goku",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063891/juguetes/goku_rfpyww.png",
     "stock": 3
   },
   {
@@ -131,7 +131,7 @@
     "name": "Harry",
     "description": "Únete al mundo mágico con esta figura de Harry Potter. ¡Prepárate para vivir aventuras fantásticas en Hogwarts!",
     "price": 3900,
-    "url_image": "Harry",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063891/juguetes/harry_b31b7u.png",
     "stock": 7
   },
   {
@@ -140,7 +140,7 @@
     "name": "Bull",
     "description": "¡El toro más valiente y fuerte está aquí! Este juguete de peluche te acompañará en tus juegos y te brindará abrazos llenos de energía.",
     "price": 2700,
-    "url_image": "Bull",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063891/juguetes/bull_ypmo5s.png",
     "stock": 4
   },
   {
@@ -149,7 +149,7 @@
     "name": "Robot",
     "description": "Desata tu imaginación con este asombroso robot de juguete. Programa y controla sus movimientos para crear emocionantes aventuras.",
     "price": 6500,
-    "url_image": "Robot",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063891/juguetes/robot_ojeoow.png",
     "stock": 2
   },
   {
@@ -158,7 +158,7 @@
     "name": "Espinas",
     "description": "Conviértete en un auténtico héroe espinoso con este juego de espadas de juguete. ¡Ideal para recrear épicas batallas medievales!",
     "price": 3200,
-    "url_image": "Espinas",
+    "url_image": "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063891/juguetes/espinas_nlyr7p.png",
     "stock": 5
   }
 ]

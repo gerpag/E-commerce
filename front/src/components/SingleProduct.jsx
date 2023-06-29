@@ -1,33 +1,24 @@
 import React from "react";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-const SingleProduct = ({ product }) => {
+const SingleProduct = () => {
+  const [product, setProduct] = useState({});
+  const productId = useLocation().pathname.split("/")[1];
 
-  const [addedProducts,setAddedProducts]=useState([])
-
-  const handleAddedProducts=()=>{
-    const newProduct={
-      id:product.id,
-      name:product.name,
-      description:product.description,
-      price:product.price,
-      url_image:product.url_image,
-      stock:product.stock
-    }
-
-    setAddedProducts([...addedProducts,newProduct])
-
-  }
-
-  console.log(addedProducts)
-
-
-
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/v1/product/${productId}`)
+      .then((res) => {
+        setProduct(res.data);
+      });
+  }, [productId]);
   return (
-    <div className="flex items-center justify-center rounded overflow-hidden shadow-lg mb-5">
+    <div className="flex items-center justify-center rounded overflow-hidden shadow-lg mb-5 h-[740px]">
       <div className="border-r border-gray-200">
         <img
-          className="img-producto-detallado w-full"
+          className="img-producto-detallado w-96 h-96"
           src={product.url_image}
           alt="foto"
         />
@@ -35,7 +26,7 @@ const SingleProduct = ({ product }) => {
 
       <div className="flex flex-col p-4">
         <div className="px-6 py-4">
-          <h1 className="font-bold text-2xl mb-10 text-center">
+          <h1 className="font-bold text-2xl mb-10 text-center uppercase">
             {product.name}
           </h1>
           <h2 className="text-center text-xl font-light p-5 mb-5">
@@ -53,11 +44,16 @@ const SingleProduct = ({ product }) => {
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 opacity-40">
             Id: {product.id}
           </span>
-          
         </div>
         <div className="flex justify-center">
-          <button onClick={handleAddedProducts} className="p-3 mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl bg-sky-500 hover:bg-sky-700 ... active:bg-violet-700">Añadir al carrito</button></div>
-        
+          <button
+            // onClick={handleAddedProducts}
+            className="p-3 mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl hover:bg-sky-700 ... active:bg-violet-700"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+
         {/* <div className='mt-7'>
                     <Count item={product} onAdd={onAdd}/>
                 </div> */}
