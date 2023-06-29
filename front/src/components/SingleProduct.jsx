@@ -55,7 +55,9 @@ const SingleProduct = ({ product }) => {
           </span>
           
         </div>
-        <button onClick={handleAddedProducts} className="mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl bg-sky-500 hover:bg-sky-700 ...">Añadir al carrito</button>
+        <div className="flex justify-center">
+          <button onClick={handleAddedProducts} className="p-3 mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl bg-sky-500 hover:bg-sky-700 ... active:bg-violet-700">Añadir al carrito</button></div>
+        
         {/* <div className='mt-7'>
                     <Count item={product} onAdd={onAdd}/>
                 </div> */}
