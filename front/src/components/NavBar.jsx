@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import logo3d from "../assets/logo3d.png";
+import { setAuthModalOpen } from "../redux/features/authModalSlice";
+import { Button } from "@mui/material";
+import Logo from "../commons/Logo";
 
 const NavBar = () => {
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   return (
     // modificar los button con link al momento de hacer rutas
     <nav className="flex items-center justify-between flex-wrap bg-blue-100">
@@ -11,7 +17,7 @@ const NavBar = () => {
           to="/"
           className="block text-xl mt-4 lg:inline-block lg:mt-0 font-bold mr-20"
         >
-          <img src={logo3d} alt="logo3d" className="w-24" />
+          <Logo />
         </Link>
       </div>
       <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto">
@@ -38,18 +44,15 @@ const NavBar = () => {
         </Link>
       </div>
       <div className="flex items-center">
-        <Link
-          to="/user/login"
-          className="block text-l mt-4 lg:inline-block lg:mt-0 font-bold text-black hover:text-blue-500 mr-4 active:underline px-4 py-2 border-transparent rounded-md transition-colors hover:border-blue-500 border-2"
-        >
-          Iniciar Sesión
-        </Link>
-        <Link
-          to="/user/register"
-          className="block text-l mt-4 lg:inline-block lg:mt-0 font-bold text-black hover:text-blue-500 mr-4 active:underline px-4 py-2 border-transparent rounded-md transition-colors hover:border-blue-500 border-2"
-        >
-          Registrarse
-        </Link>
+        {!user && (
+          <Button
+            variant="contained"
+            sx={{ marginRight: "20px" }}
+            onClick={() => dispatch(setAuthModalOpen(true))}
+          >
+            Iniciar sesión
+          </Button>
+        )}
       </div>
     </nav>
   );

@@ -1,14 +1,14 @@
 import { LoadingButton } from "@mui/lab";
 import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import { setUser } from "../redux/features/userSlice";
 
-const SignupForm = ({ switchAuthState }) => {
+const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
@@ -16,33 +16,16 @@ const SignupForm = ({ switchAuthState }) => {
 
   const signinForm = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      username: "",
       password: "",
-      confirmPassword: "",
+      username: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string()
-        .min(1, "Nombre mínimo 1 caracter")
-        .required("Nombre es requerido"),
-      lastName: Yup.string()
-        .min(1, "Apellido mpinimo 1 caracter")
-        .required("Apellido es requerido"),
-      email: Yup.string()
-        .email("Correo electrónico inválido")
-        .required("Correo es requerido"),
       username: Yup.string()
         .min(8, "Usuario mínimo 8 caracteres")
         .required("Usuario es requerido"),
       password: Yup.string()
         .min(8, "Contraseña mínimo 8 caracteres")
         .required("Contraseña es requerido"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "confirmPassword not match")
-        .min(8, "Confirmar contraseña mínimo 8 caracteres")
-        .required("Confirmar contraseña es requerido"),
     }),
     onSubmit: async (values) => {
       setErrorMessage(undefined);
@@ -67,49 +50,6 @@ const SignupForm = ({ switchAuthState }) => {
       <Stack spacing={3}>
         <TextField
           type="text"
-          placeholder="Nombre completo"
-          name="firstName"
-          fullWidth
-          value={signinForm.values.firstName}
-          onChange={signinForm.handleChange}
-          color="success"
-          error={
-            signinForm.touched.firstName &&
-            signinForm.errors.firstName !== undefined
-          }
-          helperText={
-            signinForm.touched.firstName && signinForm.errors.firstName
-          }
-        />
-        <TextField
-          type="text"
-          placeholder="Apellidos"
-          name="lastName"
-          fullWidth
-          value={signinForm.values.lastName}
-          onChange={signinForm.handleChange}
-          color="success"
-          error={
-            signinForm.touched.lastName &&
-            signinForm.errors.lastName !== undefined
-          }
-          helperText={signinForm.touched.lastName && signinForm.errors.lastName}
-        />
-        <TextField
-          type="text"
-          placeholder="Correo electrónico"
-          name="email"
-          fullWidth
-          value={signinForm.values.email}
-          onChange={signinForm.handleChange}
-          color="success"
-          error={
-            signinForm.touched.email && signinForm.errors.email !== undefined
-          }
-          helperText={signinForm.touched.email && signinForm.errors.email}
-        />
-        <TextField
-          type="text"
           placeholder="Usuario"
           name="username"
           fullWidth
@@ -122,7 +62,6 @@ const SignupForm = ({ switchAuthState }) => {
           }
           helperText={signinForm.touched.username && signinForm.errors.username}
         />
-
         <TextField
           type="password"
           placeholder="Contraseña"
@@ -137,23 +76,6 @@ const SignupForm = ({ switchAuthState }) => {
           }
           helperText={signinForm.touched.password && signinForm.errors.password}
         />
-        <TextField
-          type="password"
-          placeholder="Confirmar contraseña"
-          name="confirmPassword"
-          fullWidth
-          value={signinForm.values.confirmPassword}
-          onChange={signinForm.handleChange}
-          color="success"
-          error={
-            signinForm.touched.confirmPassword &&
-            signinForm.errors.confirmPassword !== undefined
-          }
-          helperText={
-            signinForm.touched.confirmPassword &&
-            signinForm.errors.confirmPassword
-          }
-        />
       </Stack>
 
       <LoadingButton
@@ -164,11 +86,11 @@ const SignupForm = ({ switchAuthState }) => {
         sx={{ marginTop: 4 }}
         loading={isLoginRequest}
       >
-        sign up
+        sign in
       </LoadingButton>
 
       <Button fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
-        sign in
+        sign up
       </Button>
 
       {errorMessage && (
@@ -182,4 +104,4 @@ const SignupForm = ({ switchAuthState }) => {
   );
 };
 
-export default SignupForm;
+export default SigninForm;
