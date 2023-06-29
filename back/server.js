@@ -2,7 +2,7 @@ const express = require("express");
 const db = require("./configs/db");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-
+const index = require("./models");
 
 const app = express();
 
@@ -19,7 +19,6 @@ app.use((err, req, res, next) => {
   // Loggeo de errores
   console.error(err);
 });
-
 
 const PORT = 3000;
 db.sync({ force: false })
