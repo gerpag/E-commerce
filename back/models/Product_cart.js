@@ -1,33 +1,19 @@
 const Sequelize = require("sequelize");
 const db = require("../configs/db");
 
-class User extends Sequelize.Model {}
+class Product_cart extends Sequelize.Model {}
 
-User.init(
+Product_cart.init(
   {
-    firstname: {
-      type: Sequelize.STRING,
-    },
-    lastname: {
-      type: Sequelize.STRING,
-    },
-    email: {
-      type: Sequelize.STRING,
-    },
-    username: {
-      type: Sequelize.STRING,
-    },
-    password: {
-      type: Sequelize.STRING,
-    },
-    salt: {
-      type: Sequelize.STRING,
+    amount: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     },
   },
   {
     sequelize: db,
-    modelName: "user",
+    modelName: "product_cart",
   }
 );
 
-module.exports = User;
+module.exports = Product_cart;
