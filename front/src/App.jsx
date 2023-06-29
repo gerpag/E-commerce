@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import SingleProductContainer from "./components/SingleProductContainer";
 import GridViewContainer from "./components/GridViewContainer";
 import Footer from "./components/Footer";
+import ShopingCart from "./components/ShopingCart";
 import AuthModal from "./commons/AuthModal";
 import userApi from "./api/modules/user.api";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<GridViewContainer />} />
         <Route path="/:id" element={<SingleProductContainer />} />
+        <Route path="user/cart" element={<ShopingCart/>} />
       </Routes>
       <Footer />
     </>
