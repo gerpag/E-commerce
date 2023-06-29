@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import { Button } from "@mui/material";
 import Logo from "../commons/Logo";
+import UserMenu from "../commons/UserMenu";
 
 const NavBar = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
   return (
     // modificar los button con link al momento de hacer rutas
     <nav className="flex items-center justify-between flex-wrap bg-blue-100">
@@ -53,6 +53,7 @@ const NavBar = () => {
             Iniciar sesión
           </Button>
         )}
+        {user && <UserMenu className="mr-4" />}
       </div>
     </nav>
   );
