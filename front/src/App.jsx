@@ -1,40 +1,37 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import SingleProductContainer from "./components/SingleProductContainer";
 import GridViewContainer from "./components/GridViewContainer";
 import Footer from "./components/Footer";
-import Login from "./components/Login";
 import AuthModal from "./commons/AuthModal";
-import { useEffect, useState } from "react";
+import { setUser } from "./redux/features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  const location = useLocation();
-
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (location.pathname === "/user/register") {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }, [location]);
+    const authUser = async () => {
+      const response = null;
+      const err = null;
+
+      if (response) dispatch(setUser(response));
+      if (err) dispatch(setUser(null));
+    };
+
+    authUser();
+  }, [dispatch]);
 
   return (
     <>
+      <AuthModal />
       <NavBar />
       <Routes>
         <Route path="/" element={<GridViewContainer />} />
         <Route path="/:id" element={<SingleProductContainer />} />
-        <Route path="user/login" element={<Login />} />
-        <Route
-          path="user/register"
-          element={<AuthModal isOpen={isOpen} onClose={handleCloseModal} />}
-        />
       </Routes>
       <Footer />
     </>

@@ -1,46 +1,75 @@
-import { useEffect, useRef } from "react";
+import { Box, Modal } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthModalOpen } from "../redux/features/authModalSlice";
+import SigninForm from "./SigninForm";
 import SignupForm from "./SignupForm";
+import Logo from "./Logo";
 
-const AuthModal = ({ isOpen, onClose }) => {
-  const modalRef = useRef();
+const actionState = {
+  signin: "signin",
+  signup: "signup",
+};
+
+const AuthModal = () => {
+  const { authModalOpen } = useSelector((state) => state.authModal);
+
+  const dispatch = useDispatch();
+
+  const [action, setAction] = useState(actionState.signin);
+
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
+    if (authModalOpen) setAction(actionState.signin);
+  }, [authModalOpen]);
 
-    if (isOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    }
+  const handleClose = () => dispatch(setAuthModalOpen(false));
 
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [isOpen, onClose]);
+  const switchAuthState = (state) => setAction(state);
 
   return (
-    <div
-      className={`fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-50 transition-opacity ${
-        isOpen
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-      }`}
-    >
-      <div
-        ref={modalRef}
-        className="bg-white p-8 shadow-md rounded-md max-w-sm w-full"
+    <Modal open={authModalOpen} onClose={handleClose}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "100%",
+          maxWidth: "600px",
+          padding: 4,
+          outline: "none",
+        }}
       >
-        <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
-        <SignupForm />
-        <button
-          className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 mt-4"
-          onClick={onClose}
+        <Box
+          sx={{
+            padding: 4,
+            boxShadow: 24,
+            backgroundColor: "background.paper",
+          }}
         >
-          Cerrar
-        </button>
-      </div>
-    </div>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "2rem",
+            }}
+          >
+            <Logo />
+          </Box>
+          {action === actionState.signin && (
+            <SigninForm
+              switchAuthState={() => switchAuthState(actionState.signup)}
+            />
+          )}
+
+          {action === actionState.signup && (
+            <SignupForm
+              switchAuthState={() => switchAuthState(actionState.signin)}
+            />
+          )}
+        </Box>
+      </Box>
+    </Modal>
   );
 };
 
