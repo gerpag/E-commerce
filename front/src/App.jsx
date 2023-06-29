@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import SingleProductContainer from "./components/SingleProductContainer";
 import GridViewContainer from "./components/GridViewContainer";
+import Footer from "./components/Footer";
 import AuthModal from "./commons/AuthModal";
 import { setUser } from "./redux/features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,6 +33,7 @@ function App() {
         <Route path="/" element={<GridViewContainer />} />
         <Route path="/:id" element={<SingleProductContainer />} />
       </Routes>
+      <Footer />
     </>
   );
 }
