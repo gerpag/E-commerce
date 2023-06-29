@@ -4,8 +4,9 @@ import SingleProductContainer from "./components/SingleProductContainer";
 import GridViewContainer from "./components/GridViewContainer";
 import Footer from "./components/Footer";
 import AuthModal from "./commons/AuthModal";
-import { setUser } from "./redux/features/userSlice";
+import userApi from "./api/modules/user.api";
 import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "./redux/features/userSlice";
 import { useEffect } from "react";
 
 function App() {
@@ -15,8 +16,7 @@ function App() {
 
   useEffect(() => {
     const authUser = async () => {
-      const response = null;
-      const err = null;
+      const { response, err } = await userApi.getInfo();
 
       if (response) dispatch(setUser(response));
       if (err) dispatch(setUser(null));
