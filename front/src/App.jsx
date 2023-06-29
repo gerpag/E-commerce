@@ -33,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<GridViewContainer />} />
         <Route path="/:id" element={<SingleProductContainer />} />
-        <Route path="user/cart" element={<ShopingCart/>} />
+        <Route path="user/cart" element={<ShopingCart />} />
       </Routes>
       <Footer />
     </>
