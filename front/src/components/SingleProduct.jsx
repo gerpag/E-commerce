@@ -1,6 +1,28 @@
 import React from "react";
+import { useState } from "react";
 
 const SingleProduct = ({ product }) => {
+
+  const [addedProducts,setAddedProducts]=useState([])
+
+  const handleAddedProducts=()=>{
+    const newProduct={
+      id:product.id,
+      name:product.name,
+      description:product.description,
+      price:product.price,
+      url_image:product.url_image,
+      stock:product.stock
+    }
+
+    setAddedProducts([...addedProducts,newProduct])
+
+  }
+
+  console.log(addedProducts)
+
+
+
   return (
     <div className="flex items-center justify-center rounded overflow-hidden shadow-lg mb-5">
       <div className="border-r border-gray-200">
@@ -31,7 +53,9 @@ const SingleProduct = ({ product }) => {
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 opacity-40">
             Id: {product.id}
           </span>
+          
         </div>
+        <button onClick={handleAddedProducts} className="mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl bg-sky-500 hover:bg-sky-700 ...">Añadir al carrito</button>
         {/* <div className='mt-7'>
                     <Count item={product} onAdd={onAdd}/>
                 </div> */}
