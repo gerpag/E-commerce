@@ -5,7 +5,7 @@ const Card = ({ product }) => {
   const { id, name, price, url_image, stock } = product;
 
   return (
-    <Link to={`${id}`}>
+    <Link to={`/${id}`}>
       <div
         className="max-w-xs rounded-xl overflow-hidden shadow-lg transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none"
         id={`${id}`}
@@ -16,7 +16,7 @@ const Card = ({ product }) => {
           alt={`${name}`}
         />
         <div className="px-6 py-4 border-t border-gray-200">
-          <div className=" mb-2 text-center">{name}</div>
+          <div className=" mb-2 text-center uppercase">{name}</div>
           <div className="flex justify-around mt-4">
             <p className="text-gray-700 text-base font-bold text-center">
               <span className="text-[#00a650] font-light text-sm">

@@ -1,14 +1,30 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import { Button } from "@mui/material";
 import Logo from "../commons/Logo";
 import UserMenu from "../commons/UserMenu";
+import axios from "axios";
 
-const NavBar = () => {
+const NavBar = ({ productSearch, setProductSearch }) => {
+  const [buscador, setBuscador] = useState("");
+
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const handleSearch = (e) => {
+    setBuscador(e.target.value);
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/v1/search?search=${buscador}`)
+      .then((res) => {
+        setProductSearch(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [buscador]);
   return (
     // modificar los button con link al momento de hacer rutas
     <nav className="flex items-center justify-between flex-wrap bg-blue-100">
@@ -26,13 +42,13 @@ const NavBar = () => {
             to="/category/porta-lapiz"
             className="block text-xl mt-4 lg:inline-block lg:mt-0 font-bold text-black hover:text-blue-500 mr-4 active:underline"
           >
-            Porta lapiz
+            Arte
           </Link>
           <Link
             to="/category/porta-celular"
             className="block text-xl mt-4 lg:inline-block lg:mt-0 font-bold text-black hover:text-blue-500 mr-4 active:underline"
           >
-            Porta celular
+            Juguetes
           </Link>
         </div>
         <Link to="/search" className="flex justify-center">
@@ -40,6 +56,7 @@ const NavBar = () => {
             type="text"
             placeholder="Buscar productos"
             className="block text-l mt-4 lg:inline-block lg:mt-0 font-bold text-black bg-transparent focus:outline-none focus:border-blue-500 border-2 border-transparent placeholder-black placeholder-opacity-50 p-2 mr-10"
+            onChange={handleSearch}
           />
         </Link>
       </div>
