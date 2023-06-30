@@ -10,15 +10,20 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import menuConfigs from "../configs/menu.configs";
+import { setUser } from "../redux/features/userSlice";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
-  console.log(user);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
   const toggleMenu = (e) => setAnchorEl(e.currentTarget);
 
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(setUser(null));
+  };
   return (
     <div className="mr-4">
       {user && (
@@ -54,7 +59,10 @@ const UserMenu = () => {
                 />
               </ListItemButton>
             ))}
-            <ListItemButton sx={{ borderRadius: "10px" }}>
+            <ListItemButton
+              sx={{ borderRadius: "10px" }}
+              onClick={handleLogout}
+            >
               <ListItemIcon>
                 <LogoutOutlinedIcon />
               </ListItemIcon>
