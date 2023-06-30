@@ -9,7 +9,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/v1/product/${productId}`)
+      .get(`http://localhost:3000/api/v1/product/${productId}`)
       .then((res) => {
         setProduct(res.data);
       });
