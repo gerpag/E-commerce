@@ -5,7 +5,7 @@ const Card = ({ product }) => {
   const { id, name, price, url_image, stock } = product;
 
   return (
-    <Link to={`${id}`}>
+    <Link to={`/${id}`}>
       <div
         className="max-w-xs rounded-xl overflow-hidden shadow-lg transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none"
         id={`${id}`}
