@@ -91,8 +91,20 @@ const getInfo = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  try {
+    localStorage.removeItem("actkn");
+
+    // Redirigir al usuario al inicio (home)
+    res.redirect("/api/v1");
+  } catch {
+    responseHandler.error(res);
+  }
+};
+
 module.exports = {
   signup,
   signin,
   getInfo,
+  logout,
 };

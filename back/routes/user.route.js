@@ -74,4 +74,6 @@ router.post(
 
 router.get("/info", tokenMiddleware.auth, userController.getInfo);
 
+router.post("/logout", tokenMiddleware.auth, userController.logout);
+
 module.exports = router;
