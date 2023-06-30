@@ -4,17 +4,17 @@ import SingleProductContainer from "./components/SingleProductContainer";
 import GridViewContainer from "./components/GridViewContainer";
 import Footer from "./components/Footer";
 import ShopingCart from "./components/ShopingCart";
+import GridViewSearch from "./components/GridViewSearch";
 import AuthModal from "./commons/AuthModal";
 import userApi from "./api/modules/user.api";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/features/userSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [productSearch, setProductSearch] = useState([]);
   const dispatch = useDispatch();
-
   const { user } = useSelector((state) => state.user);
-
   useEffect(() => {
     const authUser = async () => {
       const { response, err } = await userApi.getInfo();
@@ -29,11 +29,18 @@ function App() {
   return (
     <>
       <AuthModal />
-      <NavBar />
+      <NavBar
+        productSearch={productSearch}
+        setProductSearch={setProductSearch}
+      />
       <Routes>
         <Route path="/" element={<GridViewContainer />} />
         <Route path="/:id" element={<SingleProductContainer />} />
         <Route path="user/cart" element={<ShopingCart />} />
+        <Route
+          path="/search"
+          element={<GridViewSearch productSearch={productSearch} />}
+        />
       </Routes>
       <Footer />
     </>
