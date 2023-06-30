@@ -10,6 +10,8 @@ import userApi from "./api/modules/user.api";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/features/userSlice";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [productSearch, setProductSearch] = useState([]);
@@ -28,6 +30,15 @@ function App() {
 
   return (
     <>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+      />
       <AuthModal />
       <NavBar
         productSearch={productSearch}

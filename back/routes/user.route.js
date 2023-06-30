@@ -12,12 +12,12 @@ router.post(
   body("firstName")
     .exists()
     .withMessage("Nombre es requerido")
-    .isLength({ min: 8 })
+    .isLength({ min: 1 })
     .withMessage("Nombre mínimo 8 caracteres"),
   body("lastName")
     .exists()
     .withMessage("Apellido es requerido")
-    .isLength({ min: 8 })
+    .isLength({ min: 1 })
     .withMessage("Apellido mínimo 8 caracteres"),
   body("email")
     .exists()
