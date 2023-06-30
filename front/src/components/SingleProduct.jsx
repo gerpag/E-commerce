@@ -22,6 +22,7 @@ const SingleProduct = () => {
       const newAdd = product;
 
       setAddd(newAdd);
+      toast.success(`Producto ${newAdd.name} añadido al carrito`);
     }
   };
 
