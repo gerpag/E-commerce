@@ -38,7 +38,7 @@ const SigninForm = ({ switchAuthState }) => {
         signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success("Sign in success");
+        toast.success("Iniciaste sesión con éxito");
       }
 
       if (err) setErrorMessage(err.message);
@@ -86,11 +86,11 @@ const SigninForm = ({ switchAuthState }) => {
         sx={{ marginTop: 4 }}
         loading={isLoginRequest}
       >
-        sign in
+        Iniciar sesión
       </LoadingButton>
 
       <Button fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
-        sign up
+        Registrarse
       </Button>
 
       {errorMessage && (

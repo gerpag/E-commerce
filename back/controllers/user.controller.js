@@ -31,7 +31,7 @@ const signup = async (req, res) => {
 
     responseHandler.created(res, {
       token,
-      ...user._doc,
+      ...user.toJSON(),
       id: user.id,
     });
   } catch {
@@ -72,7 +72,7 @@ const signin = async (req, res) => {
 
     responseHandler.created(res, {
       token,
-      ...user._doc,
+      ...user.toJSON(),
       id: user.id,
     });
   } catch {
