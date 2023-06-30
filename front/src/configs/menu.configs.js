@@ -2,10 +2,10 @@ import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
 
 const user = [
   {
-    display: "Cambiar contraseña",
-    path: "/password-update",
+    display: "Perfil",
+    path: "/profile-update",
     // icon: <LockResetOutlinedIcon />,
-    state: "password.update",
+    state: "profile.update",
   },
 ];
 
