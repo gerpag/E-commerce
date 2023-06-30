@@ -1,5 +1,6 @@
 import React from "react";
-import { fakeData } from "../utils/fakeData";
+import axios from "axios";
+// import { fakeData } from "../utils/fakeData";
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
@@ -7,7 +8,9 @@ const GridViewContainer = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setProducts(fakeData);
+    axios.get("http://localhost:3000/api/v1/product/all").then((res) => {
+      setProducts(res.data);
+    });
   }, []);
 
   return (

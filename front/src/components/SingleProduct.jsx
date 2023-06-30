@@ -1,11 +1,62 @@
 import React from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const SingleProduct = ({ product }) => {
+const SingleProduct = () => {
+  const [product, setProduct] = useState({});
+  const productId = useLocation().pathname.split("/")[1];
+
+  const [addedProducts, setAddedProducts] = useState([]);
+  const [add, setAddd] = useState({});
+
+  const userData = localStorage.getItem("actkn");
+ 
+
+  const handleAdd = () => {
+    if (!userData) {
+      toast.error("Debes iniciar sesión para añadir productos");
+    
+    } else {
+      const newAdd = product;
+
+      setAddd(newAdd);
+      toast.success(`Producto ${newAdd.name} añadido al carrito`);
+    }
+  };
+
+  useEffect(() => {
+    // Crear el objeto localStorage si no existe
+    if (!window.localStorage.shopingCart) {
+      window.localStorage.setItem("shopingCart", JSON.stringify([])); // Inicializa el array vacío
+    }
+  }, []);
+
+  useEffect(() => {
+    // Obtener el array del localStorage
+    const array = JSON.parse(localStorage.getItem("shopingCart"));
+    // Agregar valores al array
+
+    if (add.id) {
+      array.push(add);
+      // Guardar el array actualizado en el localStorage
+      localStorage.setItem("shopingCart", JSON.stringify(array));
+    }
+  }, [add]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/v1/product/${productId}`)
+      .then((res) => {
+        setProduct(res.data);
+      });
+  }, [productId]);
   return (
-    <div className="flex items-center justify-center rounded overflow-hidden shadow-lg mb-5">
+    <div className="flex items-center justify-center rounded overflow-hidden shadow-lg mb-5 h-[740px]">
       <div className="border-r border-gray-200">
         <img
-          className="img-producto-detallado w-full"
+          className="img-producto-detallado w-96 h-96"
           src={product.url_image}
           alt="foto"
         />
@@ -13,7 +64,7 @@ const SingleProduct = ({ product }) => {
 
       <div className="flex flex-col p-4">
         <div className="px-6 py-4">
-          <h1 className="font-bold text-2xl mb-10 text-center">
+          <h1 className="font-bold text-2xl mb-10 text-center uppercase">
             {product.name}
           </h1>
           <h2 className="text-center text-xl font-light p-5 mb-5">
@@ -32,9 +83,14 @@ const SingleProduct = ({ product }) => {
             Id: {product.id}
           </span>
         </div>
-        {/* <div className='mt-7'>
-                    <Count item={product} onAdd={onAdd}/>
-                </div> */}
+        <div className="flex justify-center">
+          <button
+            onClick={handleAdd}
+            className="p-3 mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl hover:bg-sky-700 ... active:bg-violet-700"
+          >
+            Añadir al carrito
+          </button>
+        </div>
       </div>
     </div>
   );

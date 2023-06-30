@@ -2,17 +2,58 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import SingleProductContainer from "./components/SingleProductContainer";
 import GridViewContainer from "./components/GridViewContainer";
-import Login from "./components/Login";
+import Footer from "./components/Footer";
+import ShopingCart from "./components/ShopingCart";
+import GridViewSearch from "./components/GridViewSearch";
+import AuthModal from "./commons/AuthModal";
+import userApi from "./api/modules/user.api";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "./redux/features/userSlice";
+import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const [productSearch, setProductSearch] = useState([]);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  useEffect(() => {
+    const authUser = async () => {
+      const { response, err } = await userApi.getInfo();
+
+      if (response) dispatch(setUser(response));
+      if (err) dispatch(setUser(null));
+    };
+
+    authUser();
+  }, [dispatch]);
+
   return (
     <>
-      <NavBar />
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+      />
+      <AuthModal />
+      <NavBar
+        productSearch={productSearch}
+        setProductSearch={setProductSearch}
+      />
       <Routes>
         <Route path="/" element={<GridViewContainer />} />
         <Route path="/:id" element={<SingleProductContainer />} />
-        <Route path="user/login" element={<Login/>} />
+        <Route path="user/cart" element={<ShopingCart />} />
+        <Route
+          path="/search"
+          element={<GridViewSearch productSearch={productSearch} />}
+        />
       </Routes>
+      <Footer />
     </>
   );
 }
