@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const SingleProduct = () => {
   const [product, setProduct] = useState({});
   const productId = useLocation().pathname.split("/")[1];
@@ -14,6 +14,15 @@ const SingleProduct = () => {
         setProduct(res.data);
       });
   }, [productId]);
+  const userData = localStorage.getItem("actkn");
+  console.log(userData);
+  const handleAddToCart = () => {
+    if (!userData) {
+      toast.error("Debes iniciar sesión para añadir productos");
+      //alert("Debes iniciar sesión para añadir productos");
+    }
+  };
+
   return (
     <div className="flex items-center justify-center rounded overflow-hidden shadow-lg mb-5 h-[740px]">
       <div className="border-r border-gray-200">
@@ -48,6 +57,7 @@ const SingleProduct = () => {
         <div className="flex justify-center">
           <button
             // onClick={handleAddedProducts}
+            onClick={handleAddToCart}
             className="p-3 mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl hover:bg-sky-700 ... active:bg-violet-700"
           >
             Añadir al carrito
