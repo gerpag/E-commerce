@@ -9,6 +9,9 @@ import userApi from "./api/modules/user.api";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/features/userSlice";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +31,15 @@ function App() {
 
   return (
     <>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+      />
       <AuthModal />
       <NavBar />
       <Routes>
