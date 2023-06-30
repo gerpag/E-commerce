@@ -12,7 +12,6 @@ const GridViewContainer = () => {
       setProducts(res.data);
     });
   }, []);
-  console.log(products);
 
   return (
     <div className="grid gap-4 grid-cols-5 px-10 py-5 mt-10">
