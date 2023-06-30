@@ -7,6 +7,45 @@ const SingleProduct = () => {
   const [product, setProduct] = useState({});
   const productId = useLocation().pathname.split("/")[1];
 
+  const[addedProducts,setAddedProducts]=useState([]);
+  const[add,setAddd]=useState({})
+
+  const handleAdd=()=>{
+
+    const newAdd=product;
+
+    setAddd(newAdd)
+  }
+
+  useEffect(() => {
+    // Crear el objeto localStorage si no existe
+    if (!window.localStorage.shopingCart) {
+      window.localStorage.setItem('shopingCart', JSON.stringify([])); // Inicializa el array vacío
+    }
+
+  }, []);
+  
+
+  useEffect(()=>{
+
+    // Obtener el array del localStorage
+    const array = JSON.parse(localStorage.getItem('shopingCart'));
+    // Agregar valores al array
+
+    if(add.id){
+      array.push(add)
+    // Guardar el array actualizado en el localStorage
+    localStorage.setItem('shopingCart', JSON.stringify(array));
+
+    }
+
+    
+  },[add])
+
+  
+
+
+
   useEffect(() => {
     axios
       .get(`http://localhost:3000/api/v1/product/${productId}`)
@@ -47,7 +86,7 @@ const SingleProduct = () => {
         </div>
         <div className="flex justify-center">
           <button
-            // onClick={handleAddedProducts}
+             onClick={handleAdd}
             className="p-3 mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl hover:bg-sky-700 ... active:bg-violet-700"
           >
             Añadir al carrito

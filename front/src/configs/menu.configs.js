@@ -7,6 +7,12 @@ const user = [
     // icon: <LockResetOutlinedIcon />,
     state: "profile.update",
   },
+  {
+    display: "Carrito",
+    path: "/user/cart",
+    // icon: <LockResetOutlinedIcon />,
+    state: ""
+  }
 ];
 
 const menuConfigs = { user };
