@@ -2,49 +2,48 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({});
   const productId = useLocation().pathname.split("/")[1];
 
-  const[addedProducts,setAddedProducts]=useState([]);
-  const[add,setAddd]=useState({})
+  const [addedProducts, setAddedProducts] = useState([]);
+  const [add, setAddd] = useState({});
 
-  const handleAdd=()=>{
+  const userData = localStorage.getItem("actkn");
+ 
 
-    const newAdd=product;
+  const handleAdd = () => {
+    if (!userData) {
+      toast.error("Debes iniciar sesión para añadir productos");
+    
+    } else {
+      const newAdd = product;
 
-    setAddd(newAdd)
-  }
+      setAddd(newAdd);
+      toast.success(`Producto ${newAdd.name} añadido al carrito`);
+    }
+  };
 
   useEffect(() => {
     // Crear el objeto localStorage si no existe
     if (!window.localStorage.shopingCart) {
-      window.localStorage.setItem('shopingCart', JSON.stringify([])); // Inicializa el array vacío
+      window.localStorage.setItem("shopingCart", JSON.stringify([])); // Inicializa el array vacío
     }
-
   }, []);
-  
 
-  useEffect(()=>{
-
+  useEffect(() => {
     // Obtener el array del localStorage
-    const array = JSON.parse(localStorage.getItem('shopingCart'));
+    const array = JSON.parse(localStorage.getItem("shopingCart"));
     // Agregar valores al array
 
-    if(add.id){
-      array.push(add)
-    // Guardar el array actualizado en el localStorage
-    localStorage.setItem('shopingCart', JSON.stringify(array));
-
+    if (add.id) {
+      array.push(add);
+      // Guardar el array actualizado en el localStorage
+      localStorage.setItem("shopingCart", JSON.stringify(array));
     }
-
-    
-  },[add])
-
-  
-
-
+  }, [add]);
 
   useEffect(() => {
     axios
@@ -86,16 +85,12 @@ const SingleProduct = () => {
         </div>
         <div className="flex justify-center">
           <button
-             onClick={handleAdd}
+            onClick={handleAdd}
             className="p-3 mt-10 bg-blue-400  text-[#f9fafb] font-medium text-xl hover:bg-sky-700 ... active:bg-violet-700"
           >
             Añadir al carrito
           </button>
         </div>
-
-        {/* <div className='mt-7'>
-                    <Count item={product} onAdd={onAdd}/>
-                </div> */}
       </div>
     </div>
   );
