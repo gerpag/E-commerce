@@ -1,10 +1,9 @@
-const Products = require("../models/Products");
+const ProductService = require("../services/product.services")
 
 exports.addProduct = async (req, res) => {
   try {
-    const { id, categories, name, description, price, url_image, stock } =
-      req.body;
-    const product = await Products.create({
+    const { id, categories, name, description, price, url_image, stock } = req.body;
+    const productData = {
       id: id,
       categories: categories,
       name: name,
@@ -12,7 +11,8 @@ exports.addProduct = async (req, res) => {
       price: price,
       url_image: url_image,
       stock: stock,
-    });
+    };
+    const product = await ProductService.addProduct(productData);
     res.json(product);
   } catch (error) {
     console.error(error);
@@ -22,7 +22,7 @@ exports.addProduct = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Products.findAll();
+    const products = await ProductService.getAllProducts();
     res.json(products);
   } catch (error) {
     console.log(error);
@@ -32,14 +32,15 @@ exports.getAllProducts = async (req, res) => {
 
 exports.getProductId = async (req, res) => {
   try {
-    const product = await Products.findByPk(req.params.id);
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(404).json({ error: "Product not found" });
-    }
+    const productId = req.params.id;
+    const product = await ProductService.getProductById(productId);
+    res.json(product);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    if (error.message === "Product not found") {
+      res.status(404).json({ error: "Product not found" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 };
