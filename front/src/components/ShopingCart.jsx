@@ -15,8 +15,6 @@ function ShopingCart() {
     localStorage.setItem("shopingCart", JSON.stringify(updatedCartItems));
   };
 
-  //const token = JSON.parse(localStorage.getItem("actkn"));
-
   useEffect(() => {
     setAddedProducts(JSON.parse(localStorage.getItem("shopingCart")));
   }, [addedProducts]);

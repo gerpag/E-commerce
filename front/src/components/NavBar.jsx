@@ -26,7 +26,6 @@ const NavBar = ({ productSearch, setProductSearch }) => {
       .catch((err) => console.log(err));
   }, [buscador]);
   return (
-    // modificar los button con link al momento de hacer rutas
     <nav className="flex items-center justify-between flex-wrap bg-blue-100">
       <div className="flex items-center flex-shrink-0 text-black ml-5 my-5">
         <Link
