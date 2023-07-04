@@ -15,7 +15,7 @@ exports.addProduct = async (req, res) => {
     const product = await ProductService.addProduct(productData);
     res.json(product);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
