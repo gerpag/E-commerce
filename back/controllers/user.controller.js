@@ -6,14 +6,6 @@ require("dotenv").config();
 const signup = async (req, res) => {
   try {
     const { firstName, lastName, email, username, password } = req.body;
-    const checkUser = await Users.findOne({
-      where: {
-        username: username,
-      },
-    });
-
-    if (checkUser)
-      return responseHandler.badrequest(res, "username already used");
 
     const user = await Users.create({
       firstname: firstName,
@@ -41,7 +33,7 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username } = req.body;
 
     const user = await Users.findOne({
       where: {
@@ -57,10 +49,7 @@ const signin = async (req, res) => {
         "email",
       ],
     });
-    if (!user) return responseHandler.badrequest(res, "User not exist");
 
-    if (!user.validatePassword(password))
-      return responseHandler.badrequest(res, "Wrong password");
     const token = jsonwebtoken.sign(
       { data: user.id },
       process.env.TOKEN_SECRET,
