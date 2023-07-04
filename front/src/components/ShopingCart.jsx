@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ShopingCartItem from "../commons/ShopingCartItem";
+import { fakeData } from "../utils/fakeData";
+import { array } from "yup";
 
 function ShopingCart() {
   const [addedProducts, setAddedProducts] = useState(() =>
