@@ -37,7 +37,6 @@ const SigninForm = ({ switchAuthState }) => {
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
-        console.log(setUser(response));
         dispatch(setAuthModalOpen(false));
         toast.success("Iniciaste sesión con éxito");
       }

@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-// import { fakeData } from "../utils/fakeData";
 import { useState, useEffect } from "react";
 import Card from "./Card";
 

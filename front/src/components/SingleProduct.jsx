@@ -12,12 +12,10 @@ const SingleProduct = () => {
   const [add, setAddd] = useState({});
 
   const userData = localStorage.getItem("actkn");
- 
 
   const handleAdd = () => {
     if (!userData) {
       toast.error("Debes iniciar sesión para añadir productos");
-    
     } else {
       const newAdd = product;
 
@@ -27,20 +25,17 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
-    // Crear el objeto localStorage si no existe
     if (!window.localStorage.shopingCart) {
-      window.localStorage.setItem("shopingCart", JSON.stringify([])); // Inicializa el array vacío
+      window.localStorage.setItem("shopingCart", JSON.stringify([]));
     }
   }, []);
 
   useEffect(() => {
-    // Obtener el array del localStorage
     const array = JSON.parse(localStorage.getItem("shopingCart"));
-    // Agregar valores al array
 
     if (add.id) {
       array.push(add);
-      // Guardar el array actualizado en el localStorage
+
       localStorage.setItem("shopingCart", JSON.stringify(array));
     }
   }, [add]);

@@ -7,7 +7,6 @@ import { fakeData } from "../utils/fakeData";
 const SingleProductContainer = () => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
-  // logica para obtener el producto del back
 
   useEffect(() => {
     const getProductById = () => {
