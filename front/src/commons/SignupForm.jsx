@@ -41,7 +41,7 @@ const SignupForm = ({ switchAuthState }) => {
         .min(8, "Contraseña mínimo 8 caracteres")
         .required("Contraseña es requerido"),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "confirmPassword not match")
+        .oneOf([Yup.ref("password")], "Password no coincide!")
         .min(8, "Confirmar contraseña mínimo 8 caracteres")
         .required("Confirmar contraseña es requerido"),
     }),
