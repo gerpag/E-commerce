@@ -1,16 +1,10 @@
-const { Op } = require("sequelize");
-const Products = require("../models/Products");
+const SearchServices=require("../services/search.services")
+
 
 exports.getProductSearch = async (req, res) => {
   try {
     const { search } = req.query;
-    const products = await Products.findAll({
-      where: {
-        name: {
-          [Op.like]: `%${search}%`,
-        },
-      },
-    });
+    const products = await SearchServices.getProductSearch(search);
     res.json(products);
   } catch (error) {
     console.error(error);
