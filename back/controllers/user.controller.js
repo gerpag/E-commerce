@@ -2,8 +2,7 @@ const { Users } = require("../models");
 const jsonwebtoken = require("jsonwebtoken");
 const responseHandler = require("../handlers/response.handler.js");
 require("dotenv").config();
-const UserService=require("../services/user.services")
-
+const UserService = require("../services/user.services");
 
 const signup = async (req, res) => {
   try {
@@ -24,8 +23,10 @@ const signup = async (req, res) => {
 };
 
 const signin = async (req, res) => {
+  console.log("xxxxxxxxxxxxxxxxxxxxxxx");
+
   try {
-    const { username } = req.body;
+    const { username, password } = req.body;
 
     const user = await UserService.signin({
       username,
@@ -38,9 +39,6 @@ const signin = async (req, res) => {
   }
 };
 
-
-
-
 const getInfo = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -51,9 +49,6 @@ const getInfo = async (req, res) => {
     responseHandler.error(res);
   }
 };
-
-
-
 
 const logout = async (req, res) => {
   try {

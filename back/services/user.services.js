@@ -39,6 +39,7 @@ class UserService {
   }
 
   static async signin({ username, password }) {
+    console.log("estoy en service")
     try {
       const user = await Users.findOne({
         where: {
@@ -55,10 +56,7 @@ class UserService {
         ],
       });
 
-      if (!user) throw new Error("User not exist");
-
-      if (!user.validatePassword(password)) throw new Error("Wrong password");
-
+      
       const token = jsonwebtoken.sign(
         { data: user.id },
         process.env.TOKEN_SECRET,
