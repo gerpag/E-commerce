@@ -23,7 +23,7 @@ const signup = async (req, res) => {
 };
 
 const signin = async (req, res) => {
-  console.log("xxxxxxxxxxxxxxxxxxxxxxx");
+
 
   try {
     const { username, password } = req.body;

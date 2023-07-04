@@ -39,7 +39,7 @@ class UserService {
   }
 
   static async signin({ username, password }) {
-    console.log("estoy en service")
+    
     try {
       const user = await Users.findOne({
         where: {
