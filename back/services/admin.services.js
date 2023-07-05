@@ -39,11 +39,7 @@ class AdminServices {
       }
     } catch (error) {
       console.log(error);
-      if (error.message === "User not found") {
-        res.status(404).json({ error: "User not found" });
-      } else {
-        res.status(500).json({ error: "Internal Server Error" });
-      }
+      throw error;
     }
   }
 }

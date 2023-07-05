@@ -49,6 +49,9 @@ const NavBar = ({ productSearch, setProductSearch }) => {
           >
             Juguetes
           </Link>
+          <Link to="/admin"  className="block text-xl mt-4 lg:inline-block lg:mt-0 font-bold text-black hover:text-blue-500 mr-4 active:underline">
+          Admin
+          </Link>
         </div>
         <Link to="/search" className="flex justify-center">
           <input
