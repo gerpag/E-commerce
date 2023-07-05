@@ -1,11 +1,12 @@
-const ProductService = require("../services/product.services")
+const ProductService = require("../services/product.services");
 
 exports.addProduct = async (req, res) => {
   try {
-    const { id, categories, name, description, price, url_image, stock } = req.body;
+    const { id, id_category, name, description, price, url_image, stock } =
+      req.body;
     const productData = {
       id: id,
-      categories: categories,
+      id_category: id_category,
       name: name,
       description: description,
       price: price,

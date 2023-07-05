@@ -12,6 +12,7 @@ import { setUser } from "./redux/features/userSlice";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Administrator from "./components/Administrator";
 
 function App() {
   const [productSearch, setProductSearch] = useState([]);
@@ -48,6 +49,7 @@ function App() {
         <Route path="/" element={<GridViewContainer />} />
         <Route path="/:id" element={<SingleProductContainer />} />
         <Route path="user/cart" element={<ShopingCart />} />
+        <Route path="user/admin" element={<Administrator />} />
         <Route
           path="/search"
           element={<GridViewSearch productSearch={productSearch} />}
