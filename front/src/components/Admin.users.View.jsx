@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserItem from "../commons/User.table.item";
 
-function AdminView() {
+function AdminUsersView() {
   const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState();
 
@@ -37,7 +37,7 @@ function AdminView() {
 
   return (
     <div className="flex items-center flex-col h-screen">
-      <div className="flex items-center flex-col bg-stone-100 mt-5 p-5">
+      <div className="flex items-center flex-col bg-blue-100 mt-5 p-5">
         <h2 className="text-3xl mt-4">LISTADO DE USUARIOS:</h2>
         <table className="mt-5">
           <thead>
@@ -48,7 +48,7 @@ function AdminView() {
               <th className="ml-10 px-10">Apellido</th>
             </tr>
           </thead>
-          <tbody className="px-10 h-min mt-5 bg-stone-100">
+          <tbody className="px-10 h-min mt-5 bg-blue-100">
             {users.map((user, i) => {
               return <UserItem user={user} handleUserId={handleUserId} key={i} />;
             })}
@@ -59,7 +59,7 @@ function AdminView() {
   );
 }
 
-export default AdminView;
+export default AdminUsersView;
 
 
 

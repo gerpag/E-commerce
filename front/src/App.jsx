@@ -7,12 +7,13 @@ import ShopingCart from "./components/ShopingCart";
 import GridViewSearch from "./components/GridViewSearch";
 import AuthModal from "./commons/AuthModal";
 import userApi from "./api/modules/user.api";
-import AdminView from "./components/AdminView";
+import AdminUsersView from "./components/Admin.users.View";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/features/userSlice";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Administrator from "./components/Administrator";
 
 function App() {
   const [productSearch, setProductSearch] = useState([]);
@@ -49,11 +50,12 @@ function App() {
         <Route path="/" element={<GridViewContainer />} />
         <Route path="/:id" element={<SingleProductContainer />} />
         <Route path="user/cart" element={<ShopingCart />} />
+        <Route path="user/admin" element={<Administrator />} />
         <Route
           path="/search"
           element={<GridViewSearch productSearch={productSearch} />}
         />
-        <Route path="/admin" element={<AdminView />} />
+        <Route path="/users" element={<AdminUsersView />} />
       </Routes>
       <Footer />
     </>

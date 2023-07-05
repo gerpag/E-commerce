@@ -3,8 +3,7 @@ const db = require("../configs/db");
 
 const productsData = [
   {
-    id: 100,
-    categories: "arte",
+    categoryId: 1,
     name: "totoro",
     description:
       "Explora el mundo mágico de Totoro en esta hermosa ilustración. Perfecta para los amantes del Studio Ghibli.",
@@ -14,8 +13,7 @@ const productsData = [
     stock: 8,
   },
   {
-    id: 101,
-    categories: "arte",
+    categoryId: 1,
     name: "wall-e",
     description:
       "Embárcate en una aventura espacial con Wall-E en esta encantadora pintura. Ideal para los fans de Pixar.",
@@ -25,8 +23,7 @@ const productsData = [
     stock: 5,
   },
   {
-    id: 102,
-    categories: "arte",
+    categoryId: 1,
     name: "stich",
     description:
       "Descubre la ternura de Stitch en esta hermosa ilustración. Perfecta para los amantes de Disney.",
@@ -36,8 +33,7 @@ const productsData = [
     stock: 7,
   },
   {
-    id: 103,
-    categories: "arte",
+    categoryId: 1,
     name: "mascara",
     description:
       "Esta mascara artística captura la esencia de la dualidad y la expresión creativa. Una pieza única para coleccionistas.",
@@ -47,8 +43,7 @@ const productsData = [
     stock: 3,
   },
   {
-    id: 104,
-    categories: "arte",
+    categoryId: 1,
     name: "grood",
     description:
       "Grood, el gorila telepático con una historia épica, cobra vida en esta pintura vibrante. ¡Ideal para los fanáticos de los superhéroes!",
@@ -58,8 +53,7 @@ const productsData = [
     stock: 10,
   },
   {
-    id: 105,
-    categories: "arte",
+    categoryId: 1,
     name: "dragón",
     description:
       "Este impresionante dibujo muestra la majestuosidad y la fuerza de un dragón ancestral. ¡Una obra de arte para los amantes de la fantasía!",
@@ -69,8 +63,7 @@ const productsData = [
     stock: 6,
   },
   {
-    id: 106,
-    categories: "arte",
+    categoryId: 1,
     name: "mamut",
     description:
       "Explora el pasado con esta pintura de un majestuoso mamut. Una pieza única para los aficionados a la arqueología y la historia.",
@@ -80,8 +73,7 @@ const productsData = [
     stock: 4,
   },
   {
-    id: 107,
-    categories: "arte",
+    categoryId: 1,
     name: "león",
     description:
       "Este retrato cautivador muestra la nobleza y la belleza de un león en todo su esplendor. ¡Ideal para los amantes de la fauna salvaje!",
@@ -91,8 +83,7 @@ const productsData = [
     stock: 2,
   },
   {
-    id: 108,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "vegeta",
     description:
       "El poderoso guerrero Vegeta se une a la colección de figuras de acción. ¡Prepárate para la batalla con este juguete increíble!",
@@ -102,8 +93,7 @@ const productsData = [
     stock: 9,
   },
   {
-    id: 109,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "tiburón",
     description:
       "Sumérgete en la diversión con este juguete realista de un tiburón. Ideal para jugar en la piscina o crear aventuras acuáticas.",
@@ -113,8 +103,7 @@ const productsData = [
     stock: 6,
   },
   {
-    id: 110,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "steve",
     description:
       "¡El famoso personaje Steve de Minecraft cobra vida en este set de juguetes! Únete a él en emocionantes aventuras pixeladas.",
@@ -124,8 +113,7 @@ const productsData = [
     stock: 12,
   },
   {
-    id: 111,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "sony",
     description:
       "Diviértete con este adorable y suave peluche de Sony, el perro más simpático del vecindario. ¡Perfecto para abrazar y jugar!",
@@ -135,8 +123,7 @@ const productsData = [
     stock: 8,
   },
   {
-    id: 112,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "camión",
     description:
       "¿Listo para la diversión en la construcción? Este camión de juguete con funciones realistas hará que tus aventuras sean épicas.",
@@ -146,8 +133,7 @@ const productsData = [
     stock: 5,
   },
   {
-    id: 113,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "goku",
     description:
       "El legendario guerrero Goku llega en forma de figura de acción. ¡Revive las emocionantes batallas de Dragon Ball con este juguete impresionante!",
@@ -157,8 +143,7 @@ const productsData = [
     stock: 3,
   },
   {
-    id: 114,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "harry",
     description:
       "Únete al mundo mágico con esta figura de Harry Potter. ¡Prepárate para vivir aventuras fantásticas en Hogwarts!",
@@ -168,8 +153,7 @@ const productsData = [
     stock: 7,
   },
   {
-    id: 115,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "bull",
     description:
       "¡El toro más valiente y fuerte está aquí! Este juguete de peluche te acompañará en tus juegos y te brindará abrazos llenos de energía.",
@@ -179,8 +163,7 @@ const productsData = [
     stock: 4,
   },
   {
-    id: 116,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "robot",
     description:
       "Desata tu imaginación con este asombroso robot de juguete. Programa y controla sus movimientos para crear emocionantes aventuras.",
@@ -190,8 +173,7 @@ const productsData = [
     stock: 2,
   },
   {
-    id: 117,
-    categories: "Juguetes",
+    categoryId: 1,
     name: "espinas",
     description:
       "Conviértete en un auténtico héroe espinoso con este juego de espadas de juguete. ¡Ideal para recrear épicas batallas medievales!",

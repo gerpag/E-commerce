@@ -1,12 +1,12 @@
-const Products=require("../models/Products")
+const Products = require("../models/Products");
 
 class ProductService {
   static async addProduct(productData) {
     try {
-      const { id, categories, name, description, price, url_image, stock } = productData;
+      const { id_category, name, description, price, url_image, stock } =
+        productData;
       const product = await Products.create({
-        id: id,
-        categories: categories,
+        categoryId: id_category,
         name: name,
         description: description,
         price: price,
@@ -43,10 +43,6 @@ class ProductService {
       throw new Error("Internal Server Error");
     }
   }
-
-
-
-  
 }
 
 module.exports = ProductService;
