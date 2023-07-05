@@ -2,6 +2,7 @@ import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import React, { useState } from "react";
 import CategoryList from "./CategoryList";
+import { Link } from "react-router-dom";
 
 function Administrator() {
   const [value, setValue] = useState("1");
@@ -16,7 +17,7 @@ function Administrator() {
         <TabList onChange={handleChange}>
           <Tab label="Categorías" value="1" />
           <Tab label="Productos" value="2" />
-          <Tab label="Usuarios" value="3" />
+         <Link to="/users"> <Tab label="Usuarios" value="3" /></Link>
         </TabList>
       </Box>
       <TabPanel value="1">
