@@ -13,11 +13,8 @@ function ShopingCart() {
     const updatedCartItems = array.filter((item) => item.id !== itemId);
 
     localStorage.setItem("shopingCart", JSON.stringify(updatedCartItems));
-  };
-
-  useEffect(() => {
     setAddedProducts(JSON.parse(localStorage.getItem("shopingCart")));
-  }, [addedProducts]);
+  };
 
   return (
     <div className="shopingcart-content">
