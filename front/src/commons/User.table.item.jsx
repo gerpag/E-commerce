@@ -10,7 +10,7 @@ const UserItem = ({ user, handleUserId }) => {
           onClick={() => handleUserId(user.id)}
           className="hover:bg-red-600"
         >
-          Remove 🗑️
+           🗑️
         </button>
       </td>
     </tr>
