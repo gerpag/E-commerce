@@ -18,6 +18,8 @@ const SingleProduct = () => {
       toast.error("Debes iniciar sesión para añadir productos");
     } else {
       const newAdd = product;
+      newAdd.quantity=1;
+      newAdd.partialPrice=function(){return this.quantity * this.price};
 
       setAddd(newAdd);
       toast.success(`Producto ${newAdd.name} añadido al carrito`);
