@@ -1,4 +1,5 @@
 const Products = require("../models/Products");
+const Categories = require("../models/Categories");
 
 class ProductService {
   static async addProduct(productData) {
