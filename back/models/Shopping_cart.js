@@ -1,9 +1,9 @@
 const Sequelize = require("sequelize");
 const db = require("../configs/db");
 
-class ShoppingCart extends Sequelize.Model {}
+class Shopping_cart extends Sequelize.Model {}
 
-ShoppingCart.init(
+Shopping_cart.init(
   {
     id: {
       type: Sequelize.INTEGER,
@@ -21,4 +21,4 @@ ShoppingCart.init(
   }
 );
 
-module.exports = ShoppingCart;
+module.exports = Shopping_cart;
