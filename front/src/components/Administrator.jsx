@@ -3,6 +3,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import React, { useState } from "react";
 import CategoryList from "./CategoryList";
 import { Link } from "react-router-dom";
+import ProductsAdmin from "./Products.admin";
 
 function Administrator() {
   const [value, setValue] = useState("1");
@@ -17,13 +18,18 @@ function Administrator() {
         <TabList onChange={handleChange}>
           <Tab label="Categorías" value="1" />
           <Tab label="Productos" value="2" />
-         <Link to="/users"> <Tab label="Usuarios" value="3" /></Link>
+          <Link to="/users">
+            {" "}
+            <Tab label="Usuarios" value="3" />
+          </Link>
         </TabList>
       </Box>
       <TabPanel value="1">
         <CategoryList />
       </TabPanel>
-      <TabPanel value="2">Productos</TabPanel>
+      <TabPanel value="2">
+        <ProductsAdmin />
+      </TabPanel>
       <TabPanel value="3">Usuarios</TabPanel>
     </TabContext>
   );

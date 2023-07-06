@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Administrator from "./components/Administrator";
+import ProductEdit from "./components/Product.edit";
 
 function App() {
   const [productSearch, setProductSearch] = useState([]);
@@ -56,6 +57,7 @@ function App() {
           element={<GridViewSearch productSearch={productSearch} />}
         />
         <Route path="/users" element={<AdminUsersView />} />
+        <Route path="/edit/:id" element={<ProductEdit />} />
       </Routes>
       <Footer />
     </>
