@@ -7,8 +7,7 @@ import ShopingCart from "./components/ShopingCart";
 import GridViewSearch from "./components/GridViewSearch";
 import AuthModal from "./commons/AuthModal";
 import userApi from "./api/modules/user.api";
-import AdminUsersView from "./components/Admin.users.View";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "./redux/features/userSlice";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
@@ -18,7 +17,6 @@ import Administrator from "./components/Administrator";
 function App() {
   const [productSearch, setProductSearch] = useState([]);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
   useEffect(() => {
     const authUser = async () => {
       const { response, err } = await userApi.getInfo();

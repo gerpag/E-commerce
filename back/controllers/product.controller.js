@@ -45,3 +45,18 @@ exports.getProductId = async (req, res) => {
     }
   }
 };
+
+exports.getProductCategory = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+    const products = await ProductService.getProductCategory(categoryId);
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+    if (error.message === "Product not found") {
+      res.status(404).json({ error: "Product not found" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+};

@@ -1,4 +1,5 @@
 const Products = require("../models/Products");
+const Categories = require("../models/Categories");
 
 class ProductService {
   static async addProduct(productData) {
@@ -38,6 +39,24 @@ class ProductService {
       } else {
         throw new Error("Product not found");
       }
+    } catch (error) {
+      console.log(error);
+      throw new Error("Internal Server Error");
+    }
+  }
+
+  static async getProductCategory(categoryId) {
+    try {
+      const products = await Products.findAll({
+        where: {
+          categoryId: parseInt(categoryId),
+        },
+        include: {
+          model: Categories,
+          as: "category",
+        },
+      });
+      return products;
     } catch (error) {
       console.log(error);
       throw new Error("Internal Server Error");
