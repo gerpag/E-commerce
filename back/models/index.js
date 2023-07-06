@@ -5,6 +5,10 @@ const Product_cart = require("./Product_cart");
 const Categories = require("./Categories");
 
 ShoppingCart.belongsTo(Users, { as: "user" });
+ShoppingCart.hasMany(Product_cart, {
+  foreignKey: "shoppingCartId",
+  as: "products",
+});
 Product_cart.belongsTo(Products, { as: "product" });
 Product_cart.belongsTo(ShoppingCart, { as: "shopping_cart" });
 Products.belongsTo(Categories, { as: "category" });
