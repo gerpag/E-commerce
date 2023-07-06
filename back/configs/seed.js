@@ -3,7 +3,6 @@ const db = require("../configs/db");
 
 const productsData = [
   {
-    categoryId: 1,
     name: "totoro",
     description:
       "Explora el mundo mágico de Totoro en esta hermosa ilustración. Perfecta para los amantes del Studio Ghibli.",
@@ -11,6 +10,7 @@ const productsData = [
     url_image:
       "https://res.cloudinary.com/dbj54ld99/image/upload/v1688063727/arte/totoro_n7bq7d.png",
     stock: 8,
+    categoryId: 1,
   },
   {
     categoryId: 1,

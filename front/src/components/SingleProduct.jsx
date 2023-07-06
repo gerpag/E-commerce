@@ -1,16 +1,17 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import productApi from "../api/modules/product.api";
 
 const SingleProduct = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const productId = useLocation().pathname.split("/")[1];
 
   const [addedProducts, setAddedProducts] = useState([]);
   const [add, setAddd] = useState({});
-
   const userData = localStorage.getItem("actkn");
 
   const handleAdd = () => {
@@ -24,6 +25,18 @@ const SingleProduct = () => {
       setAddd(newAdd);
       toast.success(`Producto ${newAdd.name} añadido al carrito`);
     }
+  };
+
+  const handleDelete = () => {
+    productApi
+      .productDelete(productId)
+      .then((res) => {
+        toast.success("Producto eliminado");
+        navigate("/");
+      })
+      .catch((err) => {
+        toast.error("No se pudo eliminar el producto");
+      });
   };
 
   useEffect(() => {
@@ -87,6 +100,20 @@ const SingleProduct = () => {
           >
             Añadir al carrito
           </button>
+        </div>
+        <div className="flex justify-center admin">
+          <button
+            onClick={handleDelete}
+            className="p-3 mt-10 bg-red-400  text-[#f9fafb] font-medium text-xl hover:bg-red-700 m-2"
+          >
+            Eliminar producto
+          </button>
+          <Link
+            to={`/edit/${productId}`}
+            className="p-3 mt-10 bg-green-400  text-[#f9fafb] font-medium text-xl hover:bg-green-500 m-2"
+          >
+            Editar Producto
+          </Link>
         </div>
       </div>
     </div>

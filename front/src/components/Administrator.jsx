@@ -3,6 +3,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import React, { useState } from "react";
 import CategoryList from "./CategoryList";
 import { Link } from "react-router-dom";
+import ProductsAdmin from "./Products.admin";
 import AdminUsersView from "./Admin.users.View";
 
 function Administrator() {
@@ -18,7 +19,6 @@ function Administrator() {
         <TabList onChange={handleChange}>
           <Tab label="Categorías" value="1" />
           <Tab label="Productos" value="2" />
-
           <Tab label="Usuarios" value="3" />
         </TabList>
       </Box>
