@@ -6,7 +6,7 @@ export function finalPrice(arrayJson) {
   if(array===null){return 0}
   
     return array.reduce((total, item) => {
-      return total + item.quantity * item.price;
+      return total + item.amount * item.price;
     }, 0);
   }
 
