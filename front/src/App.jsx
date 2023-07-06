@@ -55,7 +55,7 @@ function App() {
           path="/search"
           element={<GridViewSearch productSearch={productSearch} />}
         />
-        <Route path="/users" element={<AdminUsersView />} />
+        {/* <Route path="/users" element={<AdminUsersView />} /> */}
       </Routes>
       <Footer />
     </>
