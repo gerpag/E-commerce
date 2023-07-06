@@ -1,14 +1,16 @@
-import { Box, Button, Divider, Stack } from "@mui/material";
+import { Box, Button, Divider, Link, Stack } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import CategoryItem from "./CategoryItem";
 import categoryApi from "../api/modules/category.api";
+import RegisterCategoryForm from "../commons/RegisterCategoryForm";
 
 export const CategoryList = () => {
   const [categories, setCategories] = useState([]);
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [page, setPage] = useState(1);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(0);
 
   const skip = 2;
 
@@ -43,21 +45,42 @@ export const CategoryList = () => {
   };
 
   return (
-    <Stack spacing={2}>
-      {filteredCategories.map((item) => (
-        <Box key={item.id}>
-          <CategoryItem category={item} onRemoved={onRemoved} />
-          <Divider
-            sx={{
-              display: { xs: "block", md: "none" },
-            }}
-          />
-        </Box>
-      ))}
-      {filteredCategories.length < categories.length && (
-        <Button onClick={onLoadMore}>Cargar más</Button>
-      )}
-    </Stack>
+    <>
+      <Link
+        sx={{
+          backgroundColor: "#1890FF",
+          color: "#fff",
+          marginLeft: "2.5rem",
+          padding: "8px",
+          borderRadius: "19px",
+          cursor: "pointer",
+          textDecoration: "none",
+        }}
+      >
+        <AddIcon /> Nuevo
+      </Link>
+
+      <RegisterCategoryForm
+        categories={categories}
+        setCategories={setCategories}
+      />
+
+      <Stack spacing={2} sx={{ marginTop: "10px" }}>
+        {filteredCategories.map((item) => (
+          <Box key={item.id}>
+            <CategoryItem category={item} onRemoved={onRemoved} />
+            <Divider
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            />
+          </Box>
+        ))}
+        {filteredCategories.length < categories.length && (
+          <Button onClick={onLoadMore}>Cargar más</Button>
+        )}
+      </Stack>
+    </>
   );
 };
 
