@@ -16,8 +16,10 @@ function ShopingCartItem({
     setCount(count + 1);
   };
   const handleSubstract = () => {
-    if (count > 1) quantityValueModify(count - 1, id);
-    setCount(count - 1);
+    if (count > 1) {
+      quantityValueModify(count - 1, id);
+      setCount(count - 1);
+    }
   };
 
   useEffect(() => {

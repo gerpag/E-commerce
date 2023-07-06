@@ -1,12 +1,17 @@
 const user = [
   {
     display: "Perfil",
-    path: "/profile-update",
+    path: "/profile",
     state: "profile.update",
   },
   {
     display: "Carrito",
     path: "/user/cart",
+    state: "",
+  },
+  {
+    display: "Admin",
+    path: "/user/admin",
     state: "",
   },
 ];
