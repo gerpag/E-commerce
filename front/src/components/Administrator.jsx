@@ -17,7 +17,10 @@ function Administrator() {
         <TabList onChange={handleChange}>
           <Tab label="Categorías" value="1" />
           <Tab label="Productos" value="2" />
-         <Link to="/users"> <Tab label="Usuarios" value="3" /></Link>
+          <Link to="/users">
+            {" "}
+            <Tab label="Usuarios" value="3" />
+          </Link>
         </TabList>
       </Box>
       <TabPanel value="1">
