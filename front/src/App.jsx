@@ -14,9 +14,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Administrator from "./components/Administrator";
 import ProductEdit from "./components/Product.edit";
+import axios from "axios";
 
 function App() {
   const [productSearch, setProductSearch] = useState([]);
+  const [products, setProducts] = useState([]);
+
   const dispatch = useDispatch();
   useEffect(() => {
     const authUser = async () => {
@@ -28,6 +31,12 @@ function App() {
 
     authUser();
   }, [dispatch]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/v1/product/all").then((res) => {
+      setProducts(res.data);
+    });
+  }, []);
 
   return (
     <>
@@ -44,9 +53,10 @@ function App() {
       <NavBar
         productSearch={productSearch}
         setProductSearch={setProductSearch}
+        setProducts={setProducts}
       />
       <Routes>
-        <Route path="/" element={<GridViewContainer />} />
+        <Route path="/" element={<GridViewContainer products={products} />} />
         <Route path="/:id" element={<SingleProductContainer />} />
         <Route path="user/cart" element={<ShopingCart />} />
         <Route path="user/admin" element={<Administrator />} />
@@ -54,7 +64,6 @@ function App() {
           path="/search"
           element={<GridViewSearch productSearch={productSearch} />}
         />
-        <Route path="/users" element={<AdminUsersView />} />
         <Route path="/edit/:id" element={<ProductEdit />} />
       </Routes>
       <Footer />
