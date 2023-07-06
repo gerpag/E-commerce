@@ -7,18 +7,20 @@ import ShopingCart from "./components/ShopingCart";
 import GridViewSearch from "./components/GridViewSearch";
 import AuthModal from "./commons/AuthModal";
 import userApi from "./api/modules/user.api";
-import AdminUsersView from "./components/Admin.users.View";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "./redux/features/userSlice";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Administrator from "./components/Administrator";
+import ProductEdit from "./components/Product.edit";
+import axios from "axios";
 
 function App() {
   const [productSearch, setProductSearch] = useState([]);
+  const [products, setProducts] = useState([]);
+
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
   useEffect(() => {
     const authUser = async () => {
       const { response, err } = await userApi.getInfo();
@@ -29,6 +31,12 @@ function App() {
 
     authUser();
   }, [dispatch]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/v1/product/all").then((res) => {
+      setProducts(res.data);
+    });
+  }, []);
 
   return (
     <>
@@ -45,9 +53,10 @@ function App() {
       <NavBar
         productSearch={productSearch}
         setProductSearch={setProductSearch}
+        setProducts={setProducts}
       />
       <Routes>
-        <Route path="/" element={<GridViewContainer />} />
+        <Route path="/" element={<GridViewContainer products={products} />} />
         <Route path="/:id" element={<SingleProductContainer />} />
         <Route path="user/cart" element={<ShopingCart />} />
         <Route path="user/admin" element={<Administrator />} />
@@ -55,7 +64,7 @@ function App() {
           path="/search"
           element={<GridViewSearch productSearch={productSearch} />}
         />
-       
+        <Route path="/edit/:id" element={<ProductEdit />} />
       </Routes>
       <Footer />
     </>

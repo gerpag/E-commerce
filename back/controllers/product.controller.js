@@ -45,3 +45,52 @@ exports.getProductId = async (req, res) => {
     }
   }
 };
+
+exports.getProductCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const products = await ProductService.getProductCategory(id);
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+    if (error.message === "Product not found") {
+      res.status(404).json({ error: "Product not found" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+};
+
+exports.deleteProductById = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await ProductService.deleteProductById(productId);
+    res.json(product);
+  } catch (error) {
+    console.log(error);
+    if (error.message === "Product not found") {
+      res.status(404).json({ error: "Product not found" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+};
+
+exports.updateProductById = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const productData = req.body;
+    const product = await ProductService.updateProductById(
+      productId,
+      productData
+    );
+    res.json(product);
+  } catch (error) {
+    console.log(error);
+    if (error.message === "Product not found") {
+      res.status(404).json({ error: "Product not found" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+};
