@@ -8,11 +8,13 @@ import RegisterCategoryForm from "../commons/RegisterCategoryForm";
 
 export const CategoryList = () => {
   const [categories, setCategories] = useState([]);
-  const [filteredCategories, setFilteredCategories] = useState([]);
-  const [page, setPage] = useState(1);
+  // const [filteredCategories, setFilteredCategories] = useState([]);
+  // const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [formData, setFormData] = useState({ id: "", name: "" });
 
-  const skip = 2;
+  // const skip = 2;
 
   useEffect(() => {
     const getCategories = async () => {
@@ -22,7 +24,7 @@ export const CategoryList = () => {
       if (response) {
         setCount(response.length);
         setCategories([...response]);
-        setFilteredCategories([...response].splice(0, skip));
+        // setFilteredCategories([...response].splice(0, skip));
       }
     };
 
@@ -32,16 +34,26 @@ export const CategoryList = () => {
   const onRemoved = (id) => {
     const newCategories = [...categories].filter((e) => e.id !== id);
     setCategories(newCategories);
-    setFilteredCategories([...newCategories].splice(0, page * skip));
+    // setFilteredCategories([...newCategories].splice(0, page * skip));
     setCount(count - 1);
   };
 
-  const onLoadMore = () => {
-    setFilteredCategories([
-      ...filteredCategories,
-      ...[...categories].splice(page * skip, skip),
-    ]);
-    setPage(page + 1);
+  const handleEdit = (category) => {
+    setSelectedCategory(category);
+    setFormData({ id: category.id, name: category.name });
+  };
+
+  // const onLoadMore = () => {
+  //   setFilteredCategories([
+  //     ...filteredCategories,
+  //     ...[...categories].splice(page * skip, skip),
+  //   ]);
+  //   setPage(page + 1);
+  // };
+
+  const handleClean = () => {
+    setSelectedCategory(null);
+    setFormData({ id: "", name: "" });
   };
 
   return (
@@ -56,6 +68,7 @@ export const CategoryList = () => {
           cursor: "pointer",
           textDecoration: "none",
         }}
+        onClick={handleClean}
       >
         <AddIcon /> Nuevo
       </Link>
@@ -63,12 +76,19 @@ export const CategoryList = () => {
       <RegisterCategoryForm
         categories={categories}
         setCategories={setCategories}
+        formData={formData}
+        setFormData={setFormData}
+        selectedCategory={selectedCategory}
       />
 
       <Stack spacing={2} sx={{ marginTop: "10px" }}>
-        {filteredCategories.map((item) => (
+        {categories.map((item) => (
           <Box key={item.id}>
-            <CategoryItem category={item} onRemoved={onRemoved} />
+            <CategoryItem
+              category={item}
+              onRemoved={onRemoved}
+              handleEdit={handleEdit}
+            />
             <Divider
               sx={{
                 display: { xs: "block", md: "none" },
@@ -76,9 +96,9 @@ export const CategoryList = () => {
             />
           </Box>
         ))}
-        {filteredCategories.length < categories.length && (
+        {/* {filteredCategories.length < categories.length && (
           <Button onClick={onLoadMore}>Cargar más</Button>
-        )}
+        )} */}
       </Stack>
     </>
   );

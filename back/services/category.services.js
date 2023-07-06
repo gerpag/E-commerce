@@ -63,7 +63,9 @@ class CategoryService {
 
   static async getAllCategories() {
     try {
-      const categories = await Categories.findAll();
+      const categories = await Categories.findAll({
+        order: [["createdAt", "DESC"]],
+      });
       return categories;
     } catch (error) {
       console.log(error);

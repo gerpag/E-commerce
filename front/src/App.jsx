@@ -55,7 +55,6 @@ function App() {
           path="/search"
           element={<GridViewSearch productSearch={productSearch} />}
         />
-       
       </Routes>
       <Footer />
     </>
