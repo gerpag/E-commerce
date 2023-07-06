@@ -15,7 +15,7 @@ import UserMenu from "../commons/UserMenu";
 import axios from "axios";
 import categoryApi from "../api/modules/category.api";
 
-const NavBar = ({ productSearch, setProductSearch }) => {
+const NavBar = ({ productSearch, setProductSearch, setProducts }) => {
   const [buscador, setBuscador] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
@@ -41,12 +41,13 @@ const NavBar = ({ productSearch, setProductSearch }) => {
   }, [buscador]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/api/v1/product/category/${category}`)
-      .then((res) => {
-        setProductSearch(res.data);
-      })
-      .catch((err) => console.log(err));
+    category != "" &&
+      axios
+        .get(`http://localhost:3000/api/v1/product/category/${category}`)
+        .then((res) => {
+          setProducts(res.data);
+        })
+        .catch((err) => console.log(err));
   }, [category]);
 
   useEffect(() => {

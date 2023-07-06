@@ -44,6 +44,30 @@ class ProductService {
       throw new Error("Internal Server Error");
     }
   }
+
+  static async getProductCategory(categoryId) {
+    try {
+      const products = await Products.findAll({
+        where: {
+          categoryId: parseInt(categoryId),
+        },
+        include: {
+          model: Categories,
+          as: "category",
+        },
+      });
+      console.log(products);
+      if (products) {
+        return products;
+      } else {
+        throw new Error("Product not found");
+      }
+    } catch (error) {
+      console.log(error);
+      throw new Error("Internal Server Error");
+    }
+  }
+
   static async deleteProductById(productId) {
     try {
       const product = await Products.findByPk(productId);

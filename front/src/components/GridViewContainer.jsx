@@ -1,17 +1,7 @@
 import React from "react";
-import axios from "axios";
-import { useState, useEffect } from "react";
 import Card from "./Card";
 
-const GridViewContainer = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/product/all").then((res) => {
-      setProducts(res.data);
-    });
-  }, []);
-
+const GridViewContainer = ({ products }) => {
   return (
     <div className="grid gap-4 grid-cols-5 px-10 py-5 mt-10">
       {products.map((product) => (
