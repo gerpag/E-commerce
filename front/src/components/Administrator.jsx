@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import CategoryList from "./CategoryList";
 import { Link } from "react-router-dom";
 import ProductsAdmin from "./Products.admin";
+import AdminUsersView from "./Admin.users.View";
 
 function Administrator() {
   const [value, setValue] = useState("1");
@@ -18,19 +19,16 @@ function Administrator() {
         <TabList onChange={handleChange}>
           <Tab label="Categorías" value="1" />
           <Tab label="Productos" value="2" />
-          <Link to="/users">
-            {" "}
-            <Tab label="Usuarios" value="3" />
-          </Link>
+          <Tab label="Usuarios" value="3" />
         </TabList>
       </Box>
       <TabPanel value="1">
         <CategoryList />
       </TabPanel>
-      <TabPanel value="2">
-        <ProductsAdmin />
+      <TabPanel value="2">Productos</TabPanel>
+      <TabPanel value="3">
+        <AdminUsersView />
       </TabPanel>
-      <TabPanel value="3">Usuarios</TabPanel>
     </TabContext>
   );
 }

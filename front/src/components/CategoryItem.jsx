@@ -2,12 +2,13 @@ import { Box, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateIcon from "@mui/icons-material/Update";
 import { LoadingButton } from "@mui/lab";
 import uiConfigs from "../configs/ui.config";
 import categoryApi from "../api/modules/category.api";
 import { useState } from "react";
 
-const CategoryItem = ({ category, onRemoved }) => {
+const CategoryItem = ({ category, onRemoved, handleEdit }) => {
   const [onRequest, setOnRequest] = useState(false);
 
   const onRemove = async () => {
@@ -55,21 +56,37 @@ const CategoryItem = ({ category, onRemoved }) => {
         </Stack>
       </Box>
 
-      <LoadingButton
-        variant="contained"
+      <Box
         sx={{
           position: { xs: "relative", md: "absolute" },
           right: { xs: 0, md: "10px" },
           marginTop: { xs: 2, md: 0 },
           width: "max-content",
         }}
-        startIcon={<DeleteIcon />}
-        loadingPosition="start"
-        loading={onRequest}
-        onClick={onRemove}
       >
-        remove
-      </LoadingButton>
+        <LoadingButton
+          variant="outlined"
+          color="secondary"
+          startIcon={<UpdateIcon />}
+          sx={{ margin: 1 }}
+          loadingPosition="start"
+          loading={onRequest}
+          onClick={() => handleEdit(category)}
+        >
+          Modificar
+        </LoadingButton>
+
+        <LoadingButton
+          variant="contained"
+          startIcon={<DeleteIcon />}
+          sx={{ margin: 1 }}
+          loadingPosition="start"
+          loading={onRequest}
+          onClick={onRemove}
+        >
+          Eliminar
+        </LoadingButton>
+      </Box>
     </Box>
   );
 };

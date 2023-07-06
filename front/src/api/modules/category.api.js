@@ -3,6 +3,7 @@ import privateClient from "../client/private.client";
 const categoryEndpoints = {
   list: "category/all",
   add: "category/add",
+  update: ({ categoryId }) => `category/${categoryId}`,
   remove: ({ categoryId }) => `category/${categoryId}`,
 };
 
@@ -12,6 +13,20 @@ const categoryApi = {
       const response = await privateClient.post(categoryEndpoints.add, {
         name,
       });
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  update: async ({ categoryId, name }) => {
+    try {
+      const response = await privateClient.put(
+        categoryEndpoints.update({ categoryId }),
+        {
+          name,
+        }
+      );
 
       return { response };
     } catch (err) {
