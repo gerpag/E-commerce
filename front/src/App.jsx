@@ -7,6 +7,7 @@ import ShopingCart from "./components/ShopingCart";
 import GridViewSearch from "./components/GridViewSearch";
 import AuthModal from "./commons/AuthModal";
 import userApi from "./api/modules/user.api";
+import AdminUsersView from "./components/Admin.users.View";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/features/userSlice";
 import { useEffect, useState } from "react";
@@ -54,6 +55,7 @@ function App() {
           path="/search"
           element={<GridViewSearch productSearch={productSearch} />}
         />
+        <Route path="/users" element={<AdminUsersView />} />
       </Routes>
       <Footer />
     </>

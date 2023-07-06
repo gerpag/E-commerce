@@ -49,6 +49,7 @@ const NavBar = ({ productSearch, setProductSearch }) => {
           >
             Juguetes
           </Link>
+          
         </div>
         <Link to="/search" className="flex justify-center">
           <input
