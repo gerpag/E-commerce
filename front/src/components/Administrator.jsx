@@ -25,7 +25,9 @@ function Administrator() {
       <TabPanel value="1">
         <CategoryList />
       </TabPanel>
-      <TabPanel value="2">Productos</TabPanel>
+      <TabPanel value="2">
+        <ProductsAdmin />
+      </TabPanel>
       <TabPanel value="3">
         <AdminUsersView />
       </TabPanel>
