@@ -4,7 +4,15 @@ const responseHandler = require("../handlers/response.handler");
 require("dotenv").config();
 
 class UserService {
-  static async signup({ firstName, lastName, email, username, password }) {
+  static async signup({
+    firstName,
+    lastName,
+    email,
+    username,
+    password,
+    is_admin,
+    is_super_admin,
+  }) {
     try {
       const checkUser = await Users.findOne({
         where: {
@@ -20,6 +28,8 @@ class UserService {
         email: email,
         username: username,
         password: password,
+        is_admin: is_admin,
+        is_super_admin: is_super_admin,
       });
 
       const token = jsonwebtoken.sign(
@@ -27,6 +37,9 @@ class UserService {
         process.env.TOKEN_SECRET,
         { expiresIn: "24h" }
       );
+      user.is_admin = is_admin;
+      user.is_super_admin = is_super_admin;
+      await user.save();
 
       return {
         token,
@@ -39,7 +52,6 @@ class UserService {
   }
 
   static async signin({ username, password }) {
-    
     try {
       const user = await Users.findOne({
         where: {
@@ -56,7 +68,6 @@ class UserService {
         ],
       });
 
-      
       const token = jsonwebtoken.sign(
         { data: user.id },
         process.env.TOKEN_SECRET,

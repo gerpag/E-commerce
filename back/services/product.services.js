@@ -85,14 +85,14 @@ class ProductService {
 
   static async updateProductById(productId, productData) {
     try {
-      const { id, categories, name, description, price, url_image, stock } =
+      const { id, categoryId, name, description, price, url_image, stock } =
         productData;
       const product = await Products.findByPk(productId);
       if (product) {
         await Products.update(
           {
             id: id,
-            categories: categories,
+            categoryId: categoryId,
             name: name,
             description: description,
             price: price,

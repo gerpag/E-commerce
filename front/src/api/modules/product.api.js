@@ -8,7 +8,14 @@ const userEndpoints = {
   productUpdate: "/product/",
 };
 const productApi = {
-  productAdd: async ({ name, price, description, url_image, stock }) => {
+  productAdd: async ({
+    name,
+    price,
+    description,
+    url_image,
+    stock,
+    id_category,
+  }) => {
     try {
       const response = await axios.post(baseURL + userEndpoints.productAdd, {
         name,
@@ -16,6 +23,7 @@ const productApi = {
         description,
         url_image,
         stock,
+        id_category,
       });
 
       return { response };
@@ -34,7 +42,10 @@ const productApi = {
       return { err };
     }
   },
-  productUpdate: async (id, { name, price, description, url_image, stock }) => {
+  productUpdate: async (
+    id,
+    { name, price, description, url_image, stock, categoryId }
+  ) => {
     try {
       const response = await axios.put(
         baseURL + userEndpoints.productUpdate + id,
@@ -44,6 +55,7 @@ const productApi = {
           description,
           url_image,
           stock,
+          categoryId,
         }
       );
 
