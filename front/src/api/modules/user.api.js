@@ -4,6 +4,7 @@ const userEndpoints = {
   signin: "user/signin",
   signup: "user/signup",
   getInfo: "user/info",
+  registerAdmin: ({ userId }) => `user/is_admin/${userId}`,
 };
 
 const userApi = {
@@ -46,6 +47,21 @@ const userApi = {
   getInfo: async () => {
     try {
       const response = await privateClient.get(userEndpoints.getInfo);
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  registerAdmin: async ({ userId, isChecked, rolUser }) => {
+    try {
+      const response = await privateClient.put(
+        userEndpoints.registerAdmin({ userId }),
+        {
+          isChecked,
+          rolUser,
+        }
+      );
 
       return { response };
     } catch (err) {

@@ -1,7 +1,6 @@
 const jsonwebtoken = require("jsonwebtoken");
 const responseHandler = require("../handlers/response.handler");
 const { Users } = require("../models");
-require("dotenv").config();
 
 const tokenDecode = (req) => {
   try {
