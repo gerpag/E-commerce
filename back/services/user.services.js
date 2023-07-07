@@ -101,6 +101,8 @@ class UserService {
   static async logout() {
     try {
       localStorage.removeItem("actkn");
+      localStorage.removeItem("shopingCart");
+
     } catch {
       throw new Error("Error logging out");
     }

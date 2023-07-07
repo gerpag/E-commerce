@@ -7,9 +7,9 @@ function ShopingCartItem({
   quantityValueModify,
   totalToPayHandler,
 }) {
-  const { id, name, price, url_image, quantity } = addedProduct;
+  const { id, name, price, url_image, amount } = addedProduct;
 
-  const [count, setCount] = useState(quantity);
+  const [count, setCount] = useState(amount);
 
   const handleAddCount = () => {
     quantityValueModify(count + 1, id);
