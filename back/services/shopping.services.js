@@ -6,7 +6,6 @@ class ShoppingServices {
     try {
       const shoppingCart = await Shopping_cart.create({ userId });
 
-      console.log("yyyyyyyyyyyy", shoppingCart.id);
 
       const productPromises = await products.map((product) => {
         const { id, amount } = product;
