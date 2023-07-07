@@ -61,7 +61,7 @@ const NavBar = ({ productSearch, setProductSearch, setProducts }) => {
     };
 
     getCategories();
-  },[]);
+  }, []);
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-blue-100">

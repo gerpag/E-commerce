@@ -4,23 +4,21 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import productApi from "../api/modules/product.api";
+import { useSelector, useDispatch } from "react-redux";
 
 const SingleProduct = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const productId = useLocation().pathname.split("/")[1];
-
-  const [addedProducts, setAddedProducts] = useState([]);
   const [add, setAddd] = useState({});
   const userData = localStorage.getItem("actkn");
-
+  const { user } = useSelector((state) => state.user);
   const handleAdd = () => {
     if (!userData) {
       toast.error("Debes iniciar sesión para añadir productos");
     } else {
       const newAdd = product;
       newAdd.amount=1;
-     
       setAddd(newAdd);
       toast.success(`Producto ${newAdd.name} añadido al carrito`);
     }
@@ -100,20 +98,24 @@ const SingleProduct = () => {
             Añadir al carrito
           </button>
         </div>
-        <div className="flex justify-center admin">
-          <button
-            onClick={handleDelete}
-            className="p-3 mt-10 bg-red-400  text-[#f9fafb] font-medium text-xl hover:bg-red-700 m-2"
-          >
-            Eliminar producto
-          </button>
-          <Link
-            to={`/edit/${productId}`}
-            className="p-3 mt-10 bg-green-400  text-[#f9fafb] font-medium text-xl hover:bg-green-500 m-2"
-          >
-            Editar Producto
-          </Link>
-        </div>
+        {user?.is_admin === true ? (
+          <div className="flex justify-center admin">
+            <button
+              onClick={handleDelete}
+              className="p-3 mt-10 bg-red-400  text-[#f9fafb] font-medium text-xl hover:bg-red-700 m-2"
+            >
+              Eliminar producto
+            </button>
+            <Link
+              to={`/edit/${productId}`}
+              className="p-3 mt-10 bg-green-400  text-[#f9fafb] font-medium text-xl hover:bg-green-500 m-2"
+            >
+              Editar Producto
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

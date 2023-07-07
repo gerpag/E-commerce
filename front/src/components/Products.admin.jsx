@@ -1,11 +1,21 @@
-import React from "react";
-import { Box, Button, Stack, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Stack,
+  TextField,
+  FormControl,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { useFormik } from "formik";
 import productApi from "../api/modules/product.api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import categoryApi from "../api/modules/category.api";
 
 const ProductsAdmin = () => {
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   const product = useFormik({
     initialValues: {
@@ -14,7 +24,7 @@ const ProductsAdmin = () => {
       price: "",
       url_image: "",
       stock: "",
-      categoryId: "",
+      id_category: "",
     },
   });
   const handleButtonClick = () => {
@@ -24,14 +34,30 @@ const ProductsAdmin = () => {
       price: product.values.price,
       url_image: product.values.url_image,
       stock: product.values.stock,
-      categoryId: product.values.categoryId,
+      id_category: product.values.id_category,
     };
     productApi.productAdd(data);
     product.resetForm();
     toast.success("Producto creado con exito!");
     navigate("/");
   };
+  useEffect(() => {
+    const getCategories = async () => {
+      const { response, err } = await categoryApi.getList();
 
+      if (err) toast.error(err.message);
+      if (response) {
+        setCategories([...response]);
+      }
+    };
+
+    getCategories();
+  }, []);
+  const handleCategoryChange = (event) => {
+    product.setFieldValue("id_category", event.target.value);
+  };
+
+  console.log(product.values);
   return (
     <div>
       <h1 className="text-center m-6 text-2xl">AGREGAR UN PRODUCTO</h1>
@@ -100,20 +126,24 @@ const ProductsAdmin = () => {
             error={product.touched.stock && product.errors.stock !== undefined}
             helperText={product.touched.stock && product.errors.stock}
           />
-          <TextField
-            type="text"
-            placeholder="Categoría"
-            name="categoryId"
-            fullWidth
-            value={product.values.categoryId}
-            onChange={product.handleChange}
-            color="success"
-            error={
-              product.touched.categoryId &&
-              product.errors.categoryId !== undefined
-            }
-            helperText={product.touched.categoryId && product.errors.categoryId}
-          />
+          <FormControl fullWidth>
+            <span>Categoria</span>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={product.values.id_category}
+              onChange={handleCategoryChange}
+            >
+              <MenuItem value="0">
+                <em>Selecciona</em>
+              </MenuItem>
+              {categories?.map((category) => (
+                <MenuItem value={category.id} key={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Button
             // type="submit"
             variant="contained"

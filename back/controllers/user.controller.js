@@ -6,7 +6,15 @@ const UserService = require("../services/user.services");
 
 const signup = async (req, res) => {
   try {
-    const { firstName, lastName, email, username, password } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      username,
+      password,
+      is_admin,
+      is_super_admin,
+    } = req.body;
 
     const user = await UserService.signup({
       firstName,
@@ -14,6 +22,8 @@ const signup = async (req, res) => {
       email,
       username,
       password,
+      is_admin,
+      is_super_admin,
     });
 
     responseHandler.created(res, user);
@@ -23,8 +33,6 @@ const signup = async (req, res) => {
 };
 
 const signin = async (req, res) => {
-
-
   try {
     const { username, password } = req.body;
 
