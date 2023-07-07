@@ -5,6 +5,7 @@ const tokenMiddleware = require("../middlewares/token.middleware");
 const {
   validateSignup,
   validateSignin,
+  validateUpdatePassword,
 } = require("../middlewares/validate.middleware");
 
 const router = express.Router();
@@ -31,6 +32,14 @@ router.put(
   "/is_admin/:userId",
   tokenMiddleware.auth,
   userController.registerAdmin
+);
+
+router.put(
+  "/update-password",
+  tokenMiddleware.auth,
+  validateUpdatePassword,
+  requestHandler.validate,
+  userController.updatePassword
 );
 
 module.exports = router;

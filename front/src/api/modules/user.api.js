@@ -5,6 +5,7 @@ const userEndpoints = {
   signup: "user/signup",
   getInfo: "user/info",
   registerAdmin: ({ userId }) => `user/is_admin/${userId}`,
+  passwordUpdate: "user/update-password",
 };
 
 const userApi = {
@@ -62,6 +63,19 @@ const userApi = {
           rolUser,
         }
       );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  passwordUpdate: async ({ password, newPassword, confirmNewPassword }) => {
+    try {
+      const response = await privateClient.put(userEndpoints.passwordUpdate, {
+        password,
+        newPassword,
+        confirmNewPassword,
+      });
 
       return { response };
     } catch (err) {

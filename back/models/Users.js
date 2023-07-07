@@ -42,7 +42,6 @@ User.init(
 User.addHook("beforeCreate", (user) => {
   const salt = bcrypt.genSaltSync(8);
   user.salt = salt;
-  console.log("pass");
 
   return bcrypt
     .hash(user.password, user.salt)
