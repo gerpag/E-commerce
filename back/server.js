@@ -4,7 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const index = require("./models");
 const routes = require("./routes");
-require("dotenv").config();
+require("dotenv").config({ path: "../.env" });
 
 const app = express();
 
@@ -15,7 +15,8 @@ app.use(cookieParser());
 
 app.use("/api/v1", routes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
+
 db.sync({ force: false })
   .then(() => {
     app.listen(PORT, () => {
