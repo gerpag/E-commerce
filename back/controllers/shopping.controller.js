@@ -4,6 +4,8 @@ const ShoppingServices=require("../services/shopping.services")
 const shoppingOrder= async (req,res)=>{
     const {userId,products}=req.body
 
+   
+
     try {
         const message = await ShoppingServices.shoppingOrder(userId, products);
         res.status(200).json(message);

@@ -58,6 +58,7 @@ function ShopingCart() {
 
     const userId =user.id;
     const products = JSON.parse(localStorage.getItem("shopingCart"));
+    console.log("xxxx",userId,products)
     axios
       .post("http://localhost:3000/api/v1/shopping", { userId, products })
       .then((res) => {
