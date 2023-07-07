@@ -7,6 +7,7 @@ import ShopingCart from "./components/ShopingCart";
 import GridViewSearch from "./components/GridViewSearch";
 import AuthModal from "./commons/AuthModal";
 import userApi from "./api/modules/user.api";
+import ConfirmedOrderView from "./components/Confirmed-order.view";
 import { useDispatch } from "react-redux";
 import { setUser } from "./redux/features/userSlice";
 import { useEffect, useState } from "react";
@@ -65,6 +66,7 @@ function App() {
           element={<GridViewSearch productSearch={productSearch} />}
         />
         <Route path="/edit/:id" element={<ProductEdit />} />
+        <Route path="confirmed-order" element={<ConfirmedOrderView/>}/>
       </Routes>
       <Footer />
     </>
