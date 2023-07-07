@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Button, Stack, TextField, FormControl } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  TextField,
+  FormControl,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { useFormik } from "formik";
 import productApi from "../api/modules/product.api";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+import categoryApi from "../api/modules/category.api";
 
 const ProductEdit = () => {
   const navigate = useNavigate();
   const [singleProduct, setSingleProduct] = useState({});
+  const [categories, setCategories] = useState([]);
   const productId = useLocation().pathname.split("/")[2];
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -18,8 +29,6 @@ const ProductEdit = () => {
         setSingleProduct(res.data);
       });
   }, [productId]);
-
-  const [loading, setLoading] = useState(true);
 
   const product = useFormik({
     initialValues: {
@@ -55,6 +64,22 @@ const ProductEdit = () => {
     }
   }, [singleProduct, productId]);
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const { response, err } = await categoryApi.getList();
+
+      if (err) toast.error(err.message);
+      if (response) {
+        setCategories([...response]);
+      }
+    };
+
+    getCategories();
+  }, [productId]);
+
+  const handleCategoryChange = (event) => {
+    product.setFieldValue("categoryId", event.target.value);
+  };
   return (
     <div>
       <h1 className="text-center m-6 text-2xl">Editar Producto</h1>
@@ -142,20 +167,24 @@ const ProductEdit = () => {
               helperText={product.touched.stock && product.errors.stock}
             />
           </FormControl>
-          <TextField
-            type="text"
-            placeholder="Categoría"
-            name="categoryId"
-            fullWidth
-            value={product.values.categoryId}
-            onChange={product.handleChange}
-            color="success"
-            error={
-              product.touched.categoryId &&
-              product.errors.categoryId !== undefined
-            }
-            helperText={product.touched.categoryId && product.errors.categoryId}
-          />
+          <FormControl fullWidth>
+            <span>Categoria</span>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={product.values.categoryId}
+              onChange={handleCategoryChange}
+            >
+              <MenuItem value="0">
+                <em>Selecciona</em>
+              </MenuItem>
+              {categories?.map((category) => (
+                <MenuItem value={category.id} key={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Button
             variant="contained"
             color="success"
