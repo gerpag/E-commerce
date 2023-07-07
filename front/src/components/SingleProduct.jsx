@@ -18,17 +18,13 @@ const SingleProduct = () => {
 
   const handleAdd = () => {
 
-    const array = JSON.parse(localStorage.getItem("shopingCart"));
-    const singleProduct=array.find((product)=>{return product.id=productId})
-
-
+  
 
     if (!userData) {
       toast.error("Debes iniciar sesión para añadir productos");
+
     } 
-    else if (singleProduct) {
-      toast.warn(`El producto ${add.name} ya fue añadido al carrito`);
-    } else {
+    else {
       const newAdd = product;
       newAdd.amount = 1;
       setAddd(newAdd);
