@@ -69,9 +69,27 @@ const logout = async (req, res) => {
   }
 };
 
+const registerAdmin = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { isChecked, rolUser } = req.body;
+
+    const user = await UserService.registerAdmin({
+      userId,
+      isChecked,
+      rolUser,
+    });
+
+    responseHandler.created(res, user);
+  } catch (error) {
+    responseHandler.error(res);
+  }
+};
+
 module.exports = {
   signup,
   signin,
   getInfo,
   logout,
+  registerAdmin,
 };

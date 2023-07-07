@@ -6,10 +6,9 @@ function AdminUsersView() {
   const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState();
 
-  const handleUserId=(id)=>{
-    setUserId(id)
-
-  }
+  const handleUserId = (id) => {
+    setUserId(id);
+  };
 
   const loadUsers = () => {
     axios
@@ -46,11 +45,16 @@ function AdminUsersView() {
               <th className="ml-10 px-10">Usuario</th>
               <th className="ml-10 px-10">Nombre</th>
               <th className="ml-10 px-10">Apellido</th>
+              <th className="ml-10 px-10">Admin</th>
+              <th className="ml-10 px-10">Súper Admin</th>
+              <th className="ml-10 px-10">Opciones</th>
             </tr>
           </thead>
           <tbody className="px-10 h-min mt-5 bg-blue-100">
             {users.map((user, i) => {
-              return <UserItem user={user} handleUserId={handleUserId} key={i} />;
+              return (
+                <UserItem user={user} handleUserId={handleUserId} key={i} />
+              );
             })}
           </tbody>
         </table>
@@ -60,8 +64,6 @@ function AdminUsersView() {
 }
 
 export default AdminUsersView;
-
-
 
 /*<div
                 key={user.id}

@@ -6,13 +6,14 @@ import {
   Menu,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import menuConfigs from "../configs/menu.configs";
 import { setUser } from "../redux/features/userSlice";
 
 const UserMenu = () => {
+  const [menuUser, setMenuUser] = useState(menuConfigs.user);
   const { user } = useSelector((state) => state.user);
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,6 +25,16 @@ const UserMenu = () => {
   const handleLogout = () => {
     dispatch(setUser(null));
   };
+
+  useEffect(() => {
+    if (user.is_admin === false && user.is_super_admin === false) {
+      const listMenu = menuConfigs.user.filter(
+        (item) => item.display !== "Admin"
+      );
+      setMenuUser(listMenu);
+    }
+  }, []);
+
   return (
     <div className="mr-4">
       {user && (
@@ -41,7 +52,7 @@ const UserMenu = () => {
             onClose={() => setAnchorEl(null)}
             PaperProps={{ sx: { padding: 0 } }}
           >
-            {menuConfigs.user.map((item, index) => (
+            {menuUser.map((item, index) => (
               <ListItemButton
                 component={Link}
                 to={item.path}

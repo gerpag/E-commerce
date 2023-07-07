@@ -27,4 +27,10 @@ router.get("/info", tokenMiddleware.auth, userController.getInfo);
 
 router.post("/logout", tokenMiddleware.auth, userController.logout);
 
+router.put(
+  "/is_admin/:userId",
+  tokenMiddleware.auth,
+  userController.registerAdmin
+);
+
 module.exports = router;
