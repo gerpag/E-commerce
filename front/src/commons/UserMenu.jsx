@@ -8,13 +8,14 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import menuConfigs from "../configs/menu.configs";
 import { setUser } from "../redux/features/userSlice";
 
 const UserMenu = () => {
   const [menuUser, setMenuUser] = useState(menuConfigs.user);
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -24,6 +25,7 @@ const UserMenu = () => {
 
   const handleLogout = () => {
     dispatch(setUser(null));
+    navigate("/");
   };
 
   useEffect(() => {

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Administrator from "./components/Administrator";
+import ProfileUser from "./components/ProfileUser";
 import ProductEdit from "./components/Product.edit";
 import axios from "axios";
 
@@ -61,12 +62,13 @@ function App() {
         <Route path="/:id" element={<SingleProductContainer />} />
         <Route path="user/cart" element={<ShopingCart />} />
         <Route path="user/admin" element={<Administrator />} />
+        <Route path="user/profile" element={<ProfileUser />} />
         <Route
           path="/search"
           element={<GridViewSearch productSearch={productSearch} />}
         />
         <Route path="/edit/:id" element={<ProductEdit />} />
-        <Route path="confirmed-order" element={<ConfirmedOrderView/>}/>
+        <Route path="confirmed-order" element={<ConfirmedOrderView />} />
       </Routes>
       <Footer />
     </>

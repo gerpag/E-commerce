@@ -57,7 +57,6 @@ const ProductsAdmin = () => {
     product.setFieldValue("id_category", event.target.value);
   };
 
-  console.log(product.values);
   return (
     <div>
       <h1 className="text-center m-6 text-2xl">AGREGAR UN PRODUCTO</h1>

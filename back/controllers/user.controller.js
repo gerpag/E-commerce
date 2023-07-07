@@ -1,5 +1,5 @@
 const { Users } = require("../models");
-const jsonwebtoken = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const responseHandler = require("../handlers/response.handler.js");
 require("dotenv").config();
 const UserService = require("../services/user.services");
@@ -86,10 +86,39 @@ const registerAdmin = async (req, res) => {
   }
 };
 
+const updatePassword = async (req, res) => {
+  try {
+    const { password, newPassword } = req.body;
+    const user = await Users.findByPk(req.user.id, {
+      attributes: ["password", "id", "salt"],
+    });
+
+    if (!user) return responseHandler.unauthorize(res);
+
+    const isPasswordValid = await user.validatePassword(password);
+
+    if (!isPasswordValid)
+      return responseHandler.badrequest(res, "Contraseña incorrecta");
+
+    const salt = bcrypt.genSaltSync(8);
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    user.password = hash;
+    user.salt = salt;
+
+    await user.save();
+
+    responseHandler.ok(res);
+  } catch {
+    responseHandler.error(res);
+  }
+};
+
 module.exports = {
   signup,
   signin,
   getInfo,
   logout,
   registerAdmin,
+  updatePassword,
 };

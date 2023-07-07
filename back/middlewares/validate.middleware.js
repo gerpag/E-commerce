@@ -92,4 +92,34 @@ const validateSignin = [
   },
 ];
 
-module.exports = { validateSignup, validateSignin };
+const validateUpdatePassword = [
+  body("password")
+    .exists()
+    .withMessage("Contraseña es requerido")
+    .isLength({ min: 8 })
+    .withMessage("Contraseña mínimo 8 caracteres"),
+  body("newPassword")
+    .exists()
+    .withMessage("Nueva contraseña es requerido")
+    .isLength({ min: 8 })
+    .withMessage("Nueva contraseña mínimo 8 caracteres"),
+  body("confirmNewPassword")
+    .exists()
+    .withMessage("Confirmar contraseña es requerido")
+    .isLength({ min: 8 })
+    .withMessage("Confirmar contraseña mínimo 8 caracteres")
+    .custom((value, { req }) => {
+      if (value !== req.body.newPassword)
+        throw new Error("Las contraseñas no coinciden");
+      return true;
+    }),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return responseHandler.badrequest(res, errors.array()[0].msg);
+    }
+    next();
+  },
+];
+
+module.exports = { validateSignup, validateSignin, validateUpdatePassword };
