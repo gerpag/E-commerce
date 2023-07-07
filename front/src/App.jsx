@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Administrator from "./components/Administrator";
 import ProductEdit from "./components/Product.edit";
+import OrderHistoryPage from "./components/OrderHistoryPage";
 import axios from "axios";
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
           element={<GridViewSearch productSearch={productSearch} />}
         />
         <Route path="/edit/:id" element={<ProductEdit />} />
+        <Route path="/user/order-history" element={<OrderHistoryPage />} />
       </Routes>
       <Footer />
     </>
