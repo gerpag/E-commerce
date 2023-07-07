@@ -6,7 +6,6 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-
 function ShopingCart() {
   const navigate = useNavigate();
 
@@ -20,7 +19,8 @@ function ShopingCart() {
     finalPrice(localStorage.getItem("shopingCart"));
   });
 
-  const {user} = useSelector((state) => {return state.user;
+  const { user } = useSelector((state) => {
+    return state.user;
   });
 
   const totalToPayHandler = (newTotal) => {
@@ -54,18 +54,20 @@ function ShopingCart() {
   }, [deletedProduct]);
 
   const shoppingConfirm = () => {
-   
-
-    const userId =user.id;
+    const userId = user.id;
+    const userEmail = user.email;
     const products = JSON.parse(localStorage.getItem("shopingCart"));
-    console.log("xxxx",userId,products)
+    console.log("xxxx", userId, products);
     axios
       .post("http://localhost:3000/api/v1/shopping", { userId, products })
       .then((res) => {
         console.log(res.data);
-        toast.success("Compra realizada con exito")
-        localStorage.removeItem("shopingCart")
-        navigate("/");
+        toast.success("Compra realizada con exito");
+        localStorage.removeItem("shopingCart");
+        navigate("/confirmed-order");
+      })
+      .then(() => {
+        axios.post("http://localhost:3000/api/v1/send-email", { userEmail });
       })
       .catch((error) => {
         console.log(error);
