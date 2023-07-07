@@ -37,9 +37,9 @@ class UserService {
         process.env.TOKEN_SECRET,
         { expiresIn: "24h" }
       );
-      user.is_admin = is_admin;
-      user.is_super_admin = is_super_admin;
-      await user.save();
+
+      user.password = undefined;
+      user.salt = undefined;
 
       return {
         token,
@@ -65,6 +65,8 @@ class UserService {
           "firstname",
           "lastname",
           "email",
+          "is_admin",
+          "is_super_admin",
         ],
       });
 
@@ -102,9 +104,43 @@ class UserService {
     try {
       localStorage.removeItem("actkn");
       localStorage.removeItem("shopingCart");
-
     } catch {
       throw new Error("Error logging out");
+    }
+  }
+
+  static async registerAdmin({ userId, isChecked, rolUser }) {
+    try {
+      const checkUser = await Users.findOne({
+        where: {
+          id: userId,
+        },
+      });
+
+      if (checkUser) {
+        let updateField;
+
+        if (rolUser === "admin") {
+          updateField = { is_admin: isChecked };
+        } else if (rolUser === "super_admin") {
+          updateField = { is_super_admin: isChecked };
+        }
+
+        if (updateField) {
+          await Users.update(updateField, {
+            where: {
+              id: userId,
+            },
+          });
+        }
+
+        const { dataValues } = await Users.findByPk(userId);
+        return dataValues;
+      } else {
+        throw new Error("Category not found");
+      }
+    } catch (error) {
+      throw error;
     }
   }
 }

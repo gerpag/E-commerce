@@ -1,14 +1,14 @@
-const jwt=require ("jsonwebtoken");
-const SECRET= "proyect3d";
+const jwt = require("jsonwebtoken");
+const SECRET = process.env.TOKEN_SECRET;
 
 const generateToken = (payload) => {
-    const token = jwt.sign({ user: payload }, SECRET, { expiresIn: "2h" });
-  
-    return token;
-  };
+  const token = jwt.sign({ user: payload }, SECRET, { expiresIn: "2h" });
 
-  function validateToken(token) {
-    return jwt.verify(token, SECRET);
-  }
-  
-  module.exports = { generateToken, validateToken };
+  return token;
+};
+
+function validateToken(token) {
+  return jwt.verify(token, SECRET);
+}
+
+module.exports = { generateToken, validateToken };
