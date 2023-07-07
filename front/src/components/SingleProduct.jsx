@@ -17,9 +17,14 @@ const SingleProduct = () => {
   const { user } = useSelector((state) => state.user);
 
   const handleAdd = () => {
+
+  
+
     if (!userData) {
       toast.error("Debes iniciar sesión para añadir productos");
-    } else {
+
+    } 
+    else {
       const newAdd = product;
       newAdd.amount = 1;
       setAddd(newAdd);

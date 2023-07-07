@@ -1,14 +1,17 @@
-const ShoppingCart = require("../models/ShoppingCart");
+const Shopping_cart = require("../models/Shopping_cart");
 
 async function getOrderHistory(req, res) {
+  const userId = req.params.id;
+
   try {
-    const userId = req.user.id;
-    const orderHistory = await ShoppingCart.findAll({
-      where: { user_id: userId },
+    const orderHistory = await Shopping_cart.findAll({
+      where: { userId: userId },
       include: "products",
     });
 
-    res.json(orderHistory);
+    const orderData = orderHistory.map((order) => order.dataValues);
+
+    res.json(orderData);
   } catch (error) {
     console.log(error);
     res
