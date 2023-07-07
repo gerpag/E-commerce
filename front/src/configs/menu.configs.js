@@ -14,6 +14,11 @@ const user = [
     path: "/user/admin",
     state: "",
   },
+  {
+    display: "Mis Compras",
+    path: "/user/order-history",
+    state: "",
+  },
 ];
 
 const menuConfigs = { user };
